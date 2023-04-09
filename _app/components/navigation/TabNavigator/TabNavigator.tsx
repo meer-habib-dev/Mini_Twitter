@@ -4,18 +4,17 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 // import CustomerScreen from '../screens/CustomerScreen';
 // import OrderScreen from '../screens/OrderScreen';
 import {useNavigation} from '@react-navigation/native';
-import {Icon} from '@rneui/base';
+// import {Icon} from '@rneui/base';
 // import HomeScreen from '../../screens/Home';
 // import ShowMore from '../../screens/ShowMore';
 import {SCREEN_WIDTH} from '../../../@lib/utils/WindowSize';
 import Colors from '../../../@lib/constants/theme/Colors';
-import MatIcon from 'react-native-vector-icons/MaterialCommunityIcons';
-import FontIcon from 'react-native-vector-icons/FontAwesome';
-import PlanetListScreen from '../../components/screens/PlanetListScreen';
-import CharacterForm from '../../screens/CharacterForm';
+import Timeline from '../../screens/Timeline';
+import Profile from '../../screens/Profile';
+
 export type TabStackParamList = {
-  PlanetListScreen: undefined;
-  CharacterForm: undefined;
+  Timeline: undefined;
+  Profile: undefined;
   ShowMore: undefined;
 };
 const Tab = createBottomTabNavigator<TabStackParamList>();
@@ -70,56 +69,54 @@ const TabNavigator = () => {
         tabBarInactiveTintColor: Colors.gray,
         headerShown: false,
 
-        tabBarIcon: ({focused, color, size}) => {
-          if (route.name === 'PlanetListScreen') {
-            return focused ? (
-              <MatIcon
-                size={30}
-                name="home"
-                color={focused ? Colors.black : Colors.gray}
-              />
-            ) : (
-              <MatIcon
-                size={30}
-                name="home-outline"
-                color={focused ? Colors.black : Colors.gray}
-              />
-            );
-          } else if (route.name === 'CharacterForm') {
-            return focused ? (
-              <MatIcon
-                size={30}
-                name="heart"
-                color={focused ? Colors.black : Colors.gray}
-              />
-            ) : (
-              <MatIcon
-                size={30}
-                name="heart-outline"
-                color={focused ? Colors.black : Colors.gray}
-              />
-            );
-          } else if (route.name === 'Settings') {
-            return focused ? (
-              <FontIcon
-                size={30}
-                name="user"
-                color={focused ? Colors.black : Colors.gray}
-              />
-            ) : (
-              <FontIcon
-                size={25}
-                name="user-o"
-                color={focused ? Colors.black : Colors.gray}
-              />
-            );
-          }
-        },
+        // tabBarIcon: ({focused, color, size}) => {
+        //   if (route.name === 'PlanetListScreen') {
+        //     return focused ? (
+        //       <MatIcon
+        //         size={30}
+        //         name="home"
+        //         color={focused ? Colors.black : Colors.gray}
+        //       />
+        //     ) : (
+        //       <MatIcon
+        //         size={30}
+        //         name="home-outline"
+        //         color={focused ? Colors.black : Colors.gray}
+        //       />
+        //     );
+        //   } else if (route.name === 'CharacterForm') {
+        //     return focused ? (
+        //       <MatIcon
+        //         size={30}
+        //         name="heart"
+        //         color={focused ? Colors.black : Colors.gray}
+        //       />
+        //     ) : (
+        //       <MatIcon
+        //         size={30}
+        //         name="heart-outline"
+        //         color={focused ? Colors.black : Colors.gray}
+        //       />
+        //     );
+        //   } else if (route.name === 'Settings') {
+        //     return focused ? (
+        //       <FontIcon
+        //         size={30}
+        //         name="user"
+        //         color={focused ? Colors.black : Colors.gray}
+        //       />
+        //     ) : (
+        //       <FontIcon
+        //         size={25}
+        //         name="user-o"
+        //         color={focused ? Colors.black : Colors.gray}
+        //       />
+        //     );
+        //   }
+        // },
       })}>
-      <Tab.Screen name="PlanetListScreen" component={PlanetListScreen} />
-      <Tab.Screen name="CharacterForm" component={CharacterForm} />
-      {/* <Tab.Screen name="ShowMore" component={ShowMore} /> */}
-      {/* <Tab.Screen name="Settings" component={ShowMore} /> */}
+      <Tab.Screen name="Profile" component={Profile} />
+      <Tab.Screen name="Timeline" component={Timeline} />
     </Tab.Navigator>
   );
 };

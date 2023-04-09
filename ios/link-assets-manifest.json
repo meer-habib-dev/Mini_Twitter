@@ -1,0 +1,13 @@
+{
+  "migIndex": 1,
+  "data": [
+    {
+      "path": "_app/@lib/assets/fonts/SinewsSansProDEMO-Medium.ttf",
+      "sha1": "87c5ae0b9711257491b172674d6edc4c5907ef4e"
+    },
+    {
+      "path": "_app/@lib/assets/fonts/SinewsSansProDEMO-Regular.ttf",
+      "sha1": "03bb0dad15a3d759f97f5b7d245d7bcb90b0cdf0"
+    }
+  ]
+}

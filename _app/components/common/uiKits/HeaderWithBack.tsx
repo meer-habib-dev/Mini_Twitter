@@ -3,10 +3,10 @@ import {View, TouchableOpacity, StyleSheet, Platform} from 'react-native';
 // import {BellIcon} from '../../../assets/svgs/SVG_LOGOS';
 import Colors from '../../../@lib/constants/theme/Colors';
 import {SCREEN_WIDTH} from '../../../@lib/utils/WindowSize';
-import Ion from 'react-native-vector-icons/Ionicons';
+// import Ion from 'react-native-vector-icons/Ionicons';
 import Text_Size from '../../../@lib/utils/textScaling';
 import HeaderText from '../text/HeaderText';
-import Screen from './Screen';
+import Screen from './SafeArea';
 // import Screen from '../Screen';
 // import {BellIcon} from '../../../assets/svgs/SVG_LOGOS';
 
@@ -29,12 +29,12 @@ const HeaderWithBack = (props: {
             props.navigation && props.navigation.goBack();
             props.onPressBack && props.onPressBack();
           }}>
-          <Ion
+          {/* <Ion
             name="ios-chevron-back"
             size={SCREEN_WIDTH <= 380 ? 20 : SCREEN_WIDTH <= 600 ? 26 : 28}
             style={styles.iconStyle}
             color={Colors.primary}
-          />
+          /> */}
         </TouchableOpacity>
         <View style={styles.titleBox}>
           <HeaderText text={props.title} />

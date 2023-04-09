@@ -1,6 +1,3 @@
-const tintColorLight: String = '#0C6157';
-const tintColorDark: String = '#fff';
-
 export default {
   light: {
     text: 'black',
@@ -11,27 +8,15 @@ export default {
     inputBackground: '#F5F5F5',
     background: '#ffffff',
     borderColor: '#d7dae2',
-    tint: tintColorLight,
-    tabIconDefault: '#ccc',
-    tabIconSelected: tintColorLight,
+
     inputBg: '#f8f4f4',
     blue: '#21409A',
     loaderBackground: '#e3e3e3',
     loaderForeground: '#D3D3D3',
   },
-  dark: {
-    text: 'white',
-    background: '#000000',
-    lightDark: '#151515',
-    tint: tintColorDark,
-    tabIconDefault: '#ccc',
-    tabIconSelected: tintColorDark,
-    borderColor: '#585858',
-    loaderBackground: '#262626',
-    loaderForeground: '#454545',
-  },
+
   button: {
-    blue: '#81a7ff',
+    blue: '#2599FB',
     grey: 'grey',
   },
   gray: 'gray',
@@ -39,15 +24,10 @@ export default {
   lightDark: '#242424',
   blue: '#1D4672',
 
-  primaryDif: '#0071FF',
-  primaryDeep: '#8B5E3C',
-  // primaryDeep: '#8B5E3C',
-  // primaryDeep: '#F87315',
-  primarySecond: '#F87315',
-  primary: '#6B4FAA',
-  primaryLight: '#FFEDD5',
-  secondary: '#FEF1E8',
-  background: 'white',
+  primary: '#04ABEE',
+  disabled: '#ACACAC',
+  background: '#F6F6F6',
+  secondary: '#FFFFFF',
   text: '#231F20',
   headerText: '#231F20',
   subText: '#9E9E9E',
