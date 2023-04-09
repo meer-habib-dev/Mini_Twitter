@@ -61,11 +61,13 @@ const Authentication = () => {
           alignItems: 'center',
           backgroundColor: Colors.primary,
         }}>
-        <ImageBackground
-          resizeMode={'contain'}
-          style={{width: '100%', height: '100%'}}
-          source={_IMAGE.logo}
-        />
+        <View style={{width: '70%', height: '70%'}}>
+          <ImageBackground
+            resizeMode={'contain'}
+            style={{width: '100%', height: '100%'}}
+            source={_IMAGE.logo}
+          />
+        </View>
       </View>
       <View style={{flex: 0.45, backgroundColor: 'white'}}>
         <TabView

@@ -3,8 +3,8 @@
 export const spacing = {
   xs: 4,
   sm: 8,
-  md: 16,
-  lg: 24,
+  md: 10,
+  lg: 20,
   xl: 32,
 };
 
@@ -17,8 +17,8 @@ export const borders = {
 
 export const margins = {
   xs: 4,
-  sm: 8,
-  md: 16,
+  sm: 10,
+  md: 20,
   lg: 24,
   xl: 32,
 };

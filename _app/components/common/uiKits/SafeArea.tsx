@@ -7,6 +7,7 @@ import {
   StyleProp,
   ViewStyle,
 } from 'react-native';
+import Colors from '../../../@lib/constants/theme/Colors';
 
 interface Props {
   children: ReactNode;
@@ -16,6 +17,7 @@ interface Props {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: Colors.background,
     paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0,
   },
 });

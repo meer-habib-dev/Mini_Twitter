@@ -11,11 +11,14 @@ import RootNavigator from './_app/components/navigation/StackNavigator/RootNavig
 
 import {NavigationContainer} from '@react-navigation/native';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
+import {Provider as PaperProvider} from 'react-native-paper';
 function App(): JSX.Element {
   return (
     <SafeAreaProvider>
       <NavigationContainer>
-        <RootNavigator />
+        <PaperProvider>
+          <RootNavigator />
+        </PaperProvider>
       </NavigationContainer>
     </SafeAreaProvider>
   );

@@ -1,12 +1,7 @@
 import {PixelRatio, Platform} from 'react-native';
 import {SCREEN_WIDTH} from './WindowSize';
 const scale = SCREEN_WIDTH / 280;
-// const scale2 =
-//   SCREEN_WIDTH <= 380
-//     ? SCREEN_WIDTH / 300
-//     : SCREEN_WIDTH <= 600
-//     ? SCREEN_WIDTH / 280
-//     : SCREEN_WIDTH / 270;
+
 export function normalize(size: number) {
   const newSize = size * scale;
   if (Platform.OS === 'ios') {
