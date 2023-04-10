@@ -24,7 +24,17 @@ const RootNavigator = () => {
       </RootStack.Group> */}
       <RootStack.Screen
         options={({navigation}) => ({
-          title: 'Post Planet',
+          title: 'Details',
+          header: () => (
+            <HeaderWithBack navigation={navigation} title="Details" />
+          ),
+        })}
+        name="Profile"
+        component={Profile}
+      />
+      <RootStack.Screen
+        options={({navigation}) => ({
+          title: 'Timeline',
           header: () => (
             <HeaderWithBack navigation={navigation} title="Post Planet" />
           ),
@@ -39,16 +49,6 @@ const RootNavigator = () => {
           }}
           name="Authentication"
           component={Authentication}
-        />
-        <RootStack.Screen
-          options={({navigation}) => ({
-            title: 'Details',
-            header: () => (
-              <HeaderWithBack navigation={navigation} title="Details" />
-            ),
-          })}
-          name="Profile"
-          component={Profile}
         />
       </RootStack.Group>
     </RootStack.Navigator>
