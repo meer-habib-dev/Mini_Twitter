@@ -25,6 +25,7 @@ export default {
   blue: '#1D4672',
 
   primary: '#04ABEE',
+  primaryDeep: '#3851DC',
   disabled: '#ACACAC',
   background: '#F6F6F6',
   secondary: '#FFFFFF',
