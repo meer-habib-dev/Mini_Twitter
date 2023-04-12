@@ -7,7 +7,7 @@ import {
 
 import {useNavigation} from '@react-navigation/native';
 
-import {SCREEN_WIDTH} from '../../../@lib/utils/WindowSize';
+import {SCREEN_WIDTH} from '../../../@lib/utils/functions/WindowSize';
 import Colors from '../../../@lib/constants/theme/Colors';
 import Timeline from '../../screens/Timeline';
 import Profile from '../../screens/Profile';

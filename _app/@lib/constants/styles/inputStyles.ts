@@ -1,6 +1,6 @@
 import {Dimensions, StyleSheet} from 'react-native';
 import Colors from '../theme/Colors';
-import Text_Size from '../../utils/textScaling';
+import Text_Size from '../../utils/functions/textScaling';
 
 const SCREEN_HEIGHT = Dimensions.get('window').height;
 const SCREEN_WIDTH = Dimensions.get('window').width;

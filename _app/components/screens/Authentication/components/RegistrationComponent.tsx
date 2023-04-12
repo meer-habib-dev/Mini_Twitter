@@ -1,17 +1,23 @@
-import {KeyboardAvoidingView, StyleSheet, Text, View} from 'react-native';
+import {KeyboardAvoidingView, StyleSheet, View} from 'react-native';
 import React from 'react';
 import TInput from '../../../common/form/TInput';
 import TButton from '../../../common/uiKits/TButton';
 import {useFormHandler} from '../../../../@lib/Hooks/useHookForm';
+import {registractionInit} from '../../../../@lib/utils/initalState/authInitialState';
+import {RegistrationVS} from '../../../../@lib/utils/validationSchema/authValidationSchema';
+// import {TouchableOpacity} from 'react-native-gesture-handler';
 
-const RegistrationComponent = () => {
-  const {control} = useFormHandler();
+const RegistrationComponent = ({onSubmit, isLoading}) => {
+  const {control, onSubmitHandler, errors} = useFormHandler(
+    registractionInit,
+    RegistrationVS,
+    onSubmit,
+  );
   return (
     <View style={{flex: 1}}>
       <KeyboardAvoidingView
         style={{
           flex: 0.8,
-          //   backgroundColor: 'red',
           justifyContent: 'center',
           alignItems: 'center',
         }}>
@@ -22,9 +28,14 @@ const RegistrationComponent = () => {
             height: '100%',
             width: '100%',
           }}>
-          <TInput control={control} placeholder={'User Name'} />
-          <TInput control={control} placeholder={'Email'} />
-          <TInput control={control} placeholder={'Password'} password />
+          <TInput control={control} placeholder={'User Name'} name="username" />
+          <TInput control={control} placeholder={'Email'} name="email" />
+          <TInput
+            control={control}
+            placeholder={'Password'}
+            password
+            name="password"
+          />
           {/* <TextInput
               autoCapitalize={'none'}
               //   value={email}
@@ -39,10 +50,11 @@ const RegistrationComponent = () => {
             /> */}
         </View>
       </KeyboardAvoidingView>
+
       <TButton
-        // disabled={typeof countries_id === 'string'}
-        onPress={() => {}}
+        onPress={onSubmitHandler}
         text="Registration"
+        isLoading={isLoading}
       />
     </View>
   );

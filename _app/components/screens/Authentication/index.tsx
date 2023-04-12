@@ -1,6 +1,25 @@
-import React, {useState} from 'react';
-import {ImageBackground, StyleSheet, View, _Image} from 'react-native';
-import {TabView, TabBar} from 'react-native-tab-view';
+import React, {useEffect, useState} from 'react';
+import {
+  ImageBackground,
+  PressableAndroidRippleConfig,
+  StyleProp,
+  StyleSheet,
+  TextStyle,
+  View,
+  ViewStyle,
+  _Image,
+} from 'react-native';
+import {
+  TabView,
+  TabBar,
+  NavigationState,
+  Route,
+  SceneRendererProps,
+  TabBarIndicatorProps,
+  TabBarItemProps,
+} from 'react-native-tab-view';
+import {Scene, Event} from 'react-native-tab-view/lib/typescript/src/types';
+import useAuthApi from '../../../@lib/api/services/useAuthApi';
 import {_IMAGE} from '../../../@lib/assets/images';
 import Colors from '../../../@lib/constants/theme/Colors';
 import TitleText from '../../common/text/TitleText';
@@ -13,6 +32,8 @@ const Authentication = () => {
     {key: 'login', text: 'LOGIN'},
     {key: 'register', text: 'REGISTRATION'},
   ]);
+  const {onSubmit, isLoading, data} = useAuthApi(index);
+
   const _renderTitle = ({route}) => {
     return (
       <TitleText
@@ -26,32 +47,88 @@ const Authentication = () => {
       />
     );
   };
-  const _renderHeader = props => {
+  const _renderHeader = (
+    props: JSX.IntrinsicAttributes &
+      SceneRendererProps & {
+        navigationState: NavigationState<Route>;
+        scrollEnabled?: boolean | undefined;
+        bounces?: boolean | undefined;
+        activeColor?: string | undefined;
+        inactiveColor?: string | undefined;
+        pressColor?: string | undefined;
+        pressOpacity?: number | undefined;
+        getLabelText?:
+          | ((scene: Scene<Route>) => string | undefined)
+          | undefined;
+        getAccessible?:
+          | ((scene: Scene<Route>) => boolean | undefined)
+          | undefined;
+        getAccessibilityLabel?:
+          | ((scene: Scene<Route>) => string | undefined)
+          | undefined;
+        getTestID?: ((scene: Scene<Route>) => string | undefined) | undefined;
+        renderLabel?:
+          | ((
+              scene: Scene<Route> & {focused: boolean; color: string},
+            ) => React.ReactNode)
+          | undefined;
+        renderIcon?:
+          | ((
+              scene: Scene<Route> & {focused: boolean; color: string},
+            ) => React.ReactNode)
+          | undefined;
+        renderBadge?: ((scene: Scene<Route>) => React.ReactNode) | undefined;
+        renderIndicator?:
+          | ((props: TabBarIndicatorProps<Route>) => React.ReactNode)
+          | undefined;
+        renderTabBarItem?:
+          | ((
+              props: TabBarItemProps<Route> & {key: string},
+            ) => React.ReactElement<
+              any,
+              string | React.JSXElementConstructor<any>
+            >)
+          | undefined;
+        onTabPress?: ((scene: Scene<Route> & Event) => void) | undefined;
+        onTabLongPress?: ((scene: Scene<Route>) => void) | undefined;
+        tabStyle?: StyleProp<ViewStyle>;
+        indicatorStyle?: StyleProp<ViewStyle>;
+        indicatorContainerStyle?: StyleProp<ViewStyle>;
+        labelStyle?: StyleProp<TextStyle>;
+        contentContainerStyle?: StyleProp<ViewStyle>;
+        style?: StyleProp<ViewStyle>;
+        gap?: number | undefined;
+        testID?: string | undefined;
+        android_ripple?: PressableAndroidRippleConfig | undefined;
+      },
+  ) => {
     return (
       <TabBar
-        inactiveColor={'#CECECE'}
         indicatorStyle={styles.tabBarIndicatorStyles}
         tabStyle={styles.tabStyles}
         style={styles.tabBarMainStyles}
-        // labelStyle={styles.tabBarLabelStyles}
-        // swipeEnabled={false}
         renderIcon={_renderTitle}
         {...props}
-        // {...this.props}
       />
     );
   };
   const _renderScene = ({route}) => {
     switch (route.key) {
       case 'register':
-        return <RegistrationComponent />;
+        return (
+          <RegistrationComponent onSubmit={onSubmit} isLoading={isLoading} />
+        );
       case 'login':
-        return <LoginComponent />;
+        return <LoginComponent isLoading={isLoading} onSubmit={onSubmit} />;
 
       default:
         return null;
     }
   };
+  useEffect(() => {
+    setIndex(0);
+  }, [data]);
+
   return (
     <View style={{flex: 1, backgroundColor: 'white'}}>
       <View
@@ -87,7 +164,7 @@ const styles = StyleSheet.create({
   tabBarIndicatorStyles: {
     backgroundColor: Colors.primary,
     width: '50%',
-    height: '7rem',
+    height: 6,
   },
 
   tabStyles: {
@@ -98,7 +175,6 @@ const styles = StyleSheet.create({
 
   tabBarMainStyles: {
     backgroundColor: 'transparent',
-    height: '50rem',
     justifyContent: 'center',
   },
 });

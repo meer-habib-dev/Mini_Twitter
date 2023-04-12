@@ -1,6 +1,6 @@
 import {StyleSheet} from 'react-native';
-import Text_Size from '../../utils/textScaling';
-import {SCREEN_HEIGHT} from '../../utils/WindowSize';
+import Text_Size from '../../utils/functions/textScaling';
+import {SCREEN_HEIGHT} from '../../utils/functions/WindowSize';
 
 export const btnStyles = StyleSheet.create({
   //card button

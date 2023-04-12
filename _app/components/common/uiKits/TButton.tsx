@@ -1,16 +1,7 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import React from 'react';
-import {
-  View,
-  Text,
-  StyleSheet,
-  TouchableOpacity,
-  GestureResponderEvent,
-  ViewStyle,
-  TextStyle,
-  useColorScheme,
-} from 'react-native';
+import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
 import Colors from '../../../@lib/constants/theme/Colors';
+import Loader from '../loader/Loader';
 
 interface Props {
   // containerStyle: any;
@@ -24,19 +15,23 @@ interface Props {
   // loading?: boolean;
   // color?: string;
 }
-const TButton = ({disabled, onPress, text}: Props) => {
-  const isDarkMode = useColorScheme() === 'dark';
-
+const TButton = ({disabled, onPress, text, isLoading}: Props) => {
   return (
     <View style={styles.continueButtonFlex}>
       <TouchableOpacity
-        disabled={disabled ? disabled : false}
+        disabled={disabled || isLoading}
         onPress={onPress}
         style={[
           styles.continueButtonView,
           {backgroundColor: !disabled ? Colors.primary : Colors.disabled},
         ]}>
-        <Text style={styles.continueButtonText}>{text ? text : 'Nastavi'}</Text>
+        {isLoading ? (
+          <Loader />
+        ) : (
+          <Text style={styles.continueButtonText}>
+            {text ? text : 'Nastavi'}
+          </Text>
+        )}
       </TouchableOpacity>
     </View>
   );

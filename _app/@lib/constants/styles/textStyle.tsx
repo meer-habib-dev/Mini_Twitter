@@ -1,6 +1,6 @@
 import {StyleSheet} from 'react-native';
 import Colors from '../theme/Colors';
-import Text_Size from '../../utils/textScaling';
+import Text_Size from '../../utils/functions/textScaling';
 
 export const textStyle = StyleSheet.create({
   descriptionText: {

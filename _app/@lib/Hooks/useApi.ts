@@ -1,3 +1,5 @@
+import {AxiosRequestConfig} from 'axios';
+import {Alert} from 'react-native';
 import {
   useQuery,
   useMutation,
@@ -5,27 +7,43 @@ import {
   InvalidateQueryFilters,
 } from 'react-query';
 import {api} from '../api/config';
-
+interface UsePostOptions extends AxiosRequestConfig {}
 function useApi() {
   const queryClient = useQueryClient();
 
   function useGet(url: string, options = {}) {
     return useQuery([url, options], async () => {
-      const response = await api.get(url, options);
-      return response.data;
+      try {
+        const response = await api.get(url, options);
+        return response.data;
+      } catch (error) {
+        console.log('Error:', error);
+      }
     });
   }
-
   function usePost(
-    url: string | InvalidateQueryFilters<unknown> | undefined,
-    data: any,
-    options = {},
+    url: string,
+    onSuccess?: () => void,
+    options: UsePostOptions = {},
   ) {
-    return useMutation(() => api.post(url as string, data, options), {
-      onSuccess: () => {
-        queryClient.invalidateQueries(url as string);
+    return useMutation(
+      async (data: any) => {
+        await api.post(url, data, options);
+        // try {
+        // } catch (error) {
+        //   console.error('Error:', error);
+        // }
       },
-    });
+      {
+        onSuccess: () => {
+          queryClient.invalidateQueries(url);
+          onSuccess && onSuccess();
+        },
+        onError: (error: any) => {
+          Alert.alert('Error!', error.message);
+        },
+      },
+    );
   }
 
   function usePut(
@@ -33,22 +51,40 @@ function useApi() {
     data: any,
     options = {},
   ) {
-    return useMutation(() => api.put(url as string, data, options), {
-      onSuccess: () => {
-        queryClient.invalidateQueries(url as string);
+    return useMutation(
+      async () => {
+        try {
+          await api.put(url as string, data, options);
+        } catch (error) {
+          console.error('Error:', error);
+        }
       },
-    });
+      {
+        onSuccess: () => {
+          queryClient.invalidateQueries(url as string);
+        },
+      },
+    );
   }
 
   function useDelete(
     url: string | InvalidateQueryFilters<unknown> | undefined,
     options = {},
   ) {
-    return useMutation(() => api.delete(url as string, options), {
-      onSuccess: () => {
-        queryClient.invalidateQueries(url as string);
+    return useMutation(
+      async () => {
+        try {
+          await api.delete(url as string, options);
+        } catch (error) {
+          console.error('Error:', error);
+        }
       },
-    });
+      {
+        onSuccess: () => {
+          queryClient.invalidateQueries(url as string);
+        },
+      },
+    );
   }
 
   return {useGet, usePost, usePut, useDelete};

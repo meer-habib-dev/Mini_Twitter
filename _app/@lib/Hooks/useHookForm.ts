@@ -15,7 +15,7 @@ export const useFormHandler = (defaultValues, schema, onSubmit) => {
 
   return {
     control,
-    onSubmit: onSubmitHandler,
+    onSubmitHandler,
     errors,
     isSubmitting,
   };

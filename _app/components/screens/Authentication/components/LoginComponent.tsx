@@ -15,9 +15,15 @@ import TButton from '../../../common/uiKits/TButton';
 import Colors from '../../../../@lib/constants/theme/Colors';
 import TInput from '../../../common/form/TInput';
 import {useFormHandler} from '../../../../@lib/Hooks/useHookForm';
+import {loginInit} from '../../../../@lib/utils/initalState/authInitialState';
+import {LoginVS} from '../../../../@lib/utils/validationSchema/authValidationSchema';
 
-const LoginComponent = () => {
-  const {control} = useFormHandler();
+const LoginComponent = ({onSubmit, isLoading}) => {
+  const {control, onSubmitHandler} = useFormHandler(
+    loginInit,
+    LoginVS,
+    onSubmit,
+  );
   return (
     <View style={{flex: 1}}>
       <KeyboardAvoidingView
@@ -34,8 +40,13 @@ const LoginComponent = () => {
             height: '100%',
             width: '100%',
           }}>
-          <TInput control={control} placeholder={'Email'} />
-          <TInput control={control} placeholder={'Password'} password />
+          <TInput control={control} placeholder={'Email'} name={'email'} />
+          <TInput
+            control={control}
+            placeholder={'Password'}
+            password
+            name={'password'}
+          />
           {/* <TextInput
               autoCapitalize={'none'}
               //   value={email}
@@ -52,7 +63,8 @@ const LoginComponent = () => {
       </KeyboardAvoidingView>
       <TButton
         // disabled={typeof countries_id === 'string'}
-        onPress={() => {}}
+        onPress={onSubmitHandler}
+        isLoading={isLoading}
         text="Log in"
       />
     </View>

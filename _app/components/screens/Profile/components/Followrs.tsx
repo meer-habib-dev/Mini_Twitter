@@ -3,7 +3,7 @@ import React from 'react';
 import {margins} from '../../../../@lib/constants';
 import {Avatar, Card, IconButton} from 'react-native-paper';
 import Colors from '../../../../@lib/constants/theme/Colors';
-import Text_Size from '../../../../@lib/utils/textScaling';
+import Text_Size from '../../../../@lib/utils/functions/textScaling';
 
 const Followrs = () => {
   function _renderItem() {

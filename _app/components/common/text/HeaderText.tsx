@@ -1,7 +1,7 @@
 import {View, Text, StyleSheet, TextStyle} from 'react-native';
 import React from 'react';
 import {useTheme} from '../../../@lib/Hooks/useTheme';
-import Text_Size from '../../../@lib/utils/textScaling';
+import Text_Size from '../../../@lib/utils/functions/textScaling';
 
 const HeaderText = (props: {
   text:

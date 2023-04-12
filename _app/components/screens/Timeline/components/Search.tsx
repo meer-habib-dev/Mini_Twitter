@@ -4,7 +4,7 @@ import {TextInput, TouchableOpacity} from 'react-native-gesture-handler';
 import Icon from 'react-native-vector-icons/AntDesign';
 import FIcon from 'react-native-vector-icons/FontAwesome';
 import Colors from '../../../../@lib/constants/theme/Colors';
-import Text_Size from '../../../../@lib/utils/textScaling';
+import Text_Size from '../../../../@lib/utils/functions/textScaling';
 import {margins} from '../../../../@lib/constants';
 const Search = ({hanldePost}) => {
   return (

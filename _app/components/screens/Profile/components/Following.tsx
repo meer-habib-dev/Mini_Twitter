@@ -3,7 +3,7 @@ import React from 'react';
 import {Avatar, Card} from 'react-native-paper';
 import {margins} from '../../../../@lib/constants';
 import Colors from '../../../../@lib/constants/theme/Colors';
-import Text_Size from '../../../../@lib/utils/textScaling';
+import Text_Size from '../../../../@lib/utils/functions/textScaling';
 import Icon from 'react-native-vector-icons/SimpleLineIcons';
 import {TouchableOpacity} from 'react-native';
 

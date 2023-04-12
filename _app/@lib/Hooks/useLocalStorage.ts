@@ -1,8 +1,7 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-import MMKVStorage, {MMKVLoader} from 'react-native-mmkv-storage';
 import {useEffect, useState} from 'react';
+import {MMKVLoader} from 'react-native-mmkv-storage';
 const storage = new MMKVLoader().initialize();
-const useLocalStorage = (key: string) => {
+export const useLocalStorage = (key: string) => {
   const [value, setValue] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -43,5 +42,3 @@ const useLocalStorage = (key: string) => {
 
   return {value, saveValue, removeValue, isLoading};
 };
-
-export default useLocalStorage;

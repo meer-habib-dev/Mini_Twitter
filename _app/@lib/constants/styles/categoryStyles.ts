@@ -1,6 +1,6 @@
 import {StyleSheet} from 'react-native';
 import Colors from '../theme/Colors';
-import {SCREEN_WIDTH} from '../../utils/WindowSize';
+import {SCREEN_WIDTH} from '../../utils/functions/WindowSize';
 
 export const categoryStyles = StyleSheet.create({
   container: {

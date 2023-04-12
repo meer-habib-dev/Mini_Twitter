@@ -3,7 +3,7 @@ import React from 'react';
 import Ant from 'react-native-vector-icons/AntDesign';
 import Colors from '../../../../@lib/constants/theme/Colors';
 import TitleText from '../../../common/text/TitleText';
-import Text_Size from '../../../../@lib/utils/textScaling';
+import Text_Size from '../../../../@lib/utils/functions/textScaling';
 import {margins} from '../../../../@lib/constants';
 const ProfileTop = () => {
   return (

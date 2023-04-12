@@ -1,6 +1,6 @@
 import {View, Platform} from 'react-native';
 import React from 'react';
-import {SCREEN_WIDTH} from '../../../@lib/utils/WindowSize';
+import {SCREEN_WIDTH} from '../../../@lib/utils/functions/WindowSize';
 // import {SCREEN_WIDTH} from '../../constants/WindowSize';
 
 const BottomSpacing = () => {

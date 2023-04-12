@@ -1,7 +1,7 @@
 import {Platform, StyleSheet} from 'react-native';
 import Colors from '../theme/Colors';
-import Text_Size from '../../utils/textScaling';
-import {SCREEN_WIDTH} from '../../utils/WindowSize';
+import Text_Size from '../../utils/functions/textScaling';
+import {SCREEN_WIDTH} from '../../utils/functions/WindowSize';
 import {textStyle} from './textStyle';
 // import {SCREEN_WIDTH} from '../../WindowSize';
 

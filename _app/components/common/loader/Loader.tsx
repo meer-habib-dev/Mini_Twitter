@@ -1,6 +1,7 @@
 import {StyleSheet, View} from 'react-native';
 import React from 'react';
 import Lottie from 'lottie-react-native';
+import {_SVGS} from '../../../@lib/assets/svgs';
 
 interface Props {
   height?: number;
@@ -10,9 +11,9 @@ const Loader = ({height}: Props) => {
     <View style={styles.loaderContainer}>
       <Lottie
         style={{
-          height: height ? height : 300,
+          height: height ? height : 70,
         }}
-        source={require('../../assets/json/planet.json')}
+        source={_SVGS.loader}
         autoPlay
         loop
       />
@@ -25,6 +26,6 @@ export default Loader;
 const styles = StyleSheet.create({
   loaderContainer: {alignItems: 'center', flex: 1, justifyContent: 'center'},
   loader: {
-    height: 300,
+    width: '100%',
   },
 });

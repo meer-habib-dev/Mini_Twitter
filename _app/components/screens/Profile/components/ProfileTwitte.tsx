@@ -7,7 +7,7 @@ import TitleText from '../../../common/text/TitleText';
 import MyTwitte from './MyTwitte';
 import Followrs from './Followrs';
 import Following from './Following';
-import Text_Size from '../../../../@lib/utils/textScaling';
+import Text_Size from '../../../../@lib/utils/functions/textScaling';
 
 const ProfileTwitte = () => {
   const [index, setIndex] = React.useState(0);
@@ -17,7 +17,7 @@ const ProfileTwitte = () => {
     {key: 'following', text: 'Following'},
   ]);
   const _renderTitle = ({route}) => {
-    console.log('r', route);
+    // console.log('r', route);
     return (
       <TitleText
         textStyle={{
