@@ -5,7 +5,8 @@ import HeaderWithBack from '../../common/uiKits/HeaderWithBack';
 import Authentication from '../../screens/Authentication';
 import Profile from '../../screens/Profile';
 import Timeline from '../../screens/Timeline';
-import {useLocalStorage} from '../../../@lib/Hooks/useLocalStorage';
+// import {useLocalStorage} from '../../../@lib/Hooks/useLocalStorage';
+import {getStorageItem} from '../../../@lib/utils/functions/storage';
 
 export type RootStackParamList = {
   Main: undefined;
@@ -15,11 +16,12 @@ export type RootStackParamList = {
 };
 const RootStack = createNativeStackNavigator<RootStackParamList>();
 const RootNavigator = () => {
-  const {value} = useLocalStorage('auth-token');
-  // const value = storage.getValue('auth-token');
+  const token = getStorageItem('auth-token', 'str');
+
   return (
     <RootStack.Navigator
-      initialRouteName={value ? 'Main' : 'Authentication'}
+      initialRouteName={true ? 'Main' : 'Authentication'}
+      // initialRouteName={token ? 'Main' : 'Authentication'}
       screenOptions={{
         gestureDirection: 'horizontal',
       }}>

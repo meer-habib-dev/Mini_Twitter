@@ -4,17 +4,24 @@ import {margins} from '../../../@lib/constants';
 import SafeArea from '../../common/uiKits/SafeArea';
 import PostCard from './components/PostCard';
 import Search from './components/Search';
-import {FAB} from 'react-native-paper';
+import {ActivityIndicator, FAB} from 'react-native-paper';
 import Colors from '../../../@lib/constants/theme/Colors';
 import TBottomSheet from '../../common/modal/TBottomSheet';
 import TitleText from '../../common/text/TitleText';
+import {useTimelineApi} from '../../../@lib/api/services/useTimelineApi';
+// import {useLocalStorage} from '../../../@lib/Hooks/useLocalStorage';
 const Timeline = () => {
+  const {isLoading, data, handleLoadMore, isRefetching} = useTimelineApi();
   const [post, setPost] = useState(false);
 
   function hanldePost() {
     setPost(prev => !prev);
   }
-
+  const renderLoader = () => <ActivityIndicator size="large" />;
+  console.log(
+    'c',
+    data?.pages?.flatMap(page => page?.data?.users),
+  );
   return (
     <SafeArea style={styles.container}>
       {/* Search */}
@@ -22,9 +29,14 @@ const Timeline = () => {
 
       {/* Card */}
       <FlatList
-        data={[1, 2, 2]}
+        data={data?.pages?.flatMap(page => page?.data?.users)}
         renderItem={({}) => <PostCard />}
+        // keyExtractor={item => item.id}
+        onEndReached={handleLoadMore}
+        onEndReachedThreshold={0.5}
         showsVerticalScrollIndicator={false}
+        // ListFooterComponent={isRefetching ? renderLoader : null}
+        ListEmptyComponent={isLoading ? renderLoader : null}
       />
       <FAB
         // size="large"

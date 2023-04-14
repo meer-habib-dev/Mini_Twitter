@@ -1,29 +1,41 @@
-import {MMKVLoader} from 'react-native-mmkv-storage';
+import {MMKV} from 'react-native-mmkv';
 
-const storage = new MMKVLoader().initialize();
-
-const getValue = async (key: string) => {
-  try {
-    return await storage.getStringAsync(key);
-  } catch (error) {
-    console.error(error);
-  } finally {
-  }
+const STORAGE_KEY_PREFIX = '@miniTwitter';
+const storage = new Object();
+// const storage = new MMKV();
+const setStorageItem = (key: any, value: any) => {
+  // const storageKey = `${STORAGE_KEY_PREFIX}:${key}`;
+  // storage.set(storageKey, value);
 };
 
-const saveValue = async (key: string, data: string) => {
-  try {
-    await storage.setStringAsync(key, data);
-  } catch (error) {
-    console.error(error);
-  }
+const getStorageItem = (key: any, type = 'str' || 'num' || 'bool') => {
+  const storageKey = `${STORAGE_KEY_PREFIX}:${key}`;
+  // return type === 'str'
+  //   ? storage.getString(storageKey)
+  //   : type === 'num'
+  //   ? storage.getNumber(storageKey)
+  //   : storage.getBoolean(storageKey);
 };
 
-const removeValue = async (key: string) => {
-  try {
-    await storage.removeItem(key);
-  } catch (error) {
-    console.error(error);
-  }
+const updateStorageItem = (
+  key: any,
+  value: any,
+  type = 'str' || 'num' || 'bool',
+) => {
+  // const storageKey = `${STORAGE_KEY_PREFIX}:${key}`;
+  // const currentValue =
+  //   type === 'str'
+  //     ? storage.getString(storageKey)
+  //     : type === 'num'
+  //     ? storage.getNumber(storageKey)
+  //     : storage.getBoolean(storageKey);
+  // const updatedValue = {...currentValue, ...value};
+  // storage.set(storageKey, updatedValue);
 };
-export default {getValue, saveValue, removeValue};
+
+const deleteStorageItem = (key: any) => {
+  // const storageKey = `${STORAGE_KEY_PREFIX}:${key}`;
+  // storage.delete(storageKey);
+};
+
+export {setStorageItem, getStorageItem, updateStorageItem, deleteStorageItem};

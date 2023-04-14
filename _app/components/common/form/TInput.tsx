@@ -15,7 +15,6 @@ const TInput = ({control, placeholder, password, name}) => {
       name={name}
       rules={{required: true}}
       render={({field: {onChange, onBlur, value}, formState: {errors}}) => {
-        console.log('erro', errors[name]?.message);
         return (
           <View
             style={[
@@ -34,6 +33,7 @@ const TInput = ({control, placeholder, password, name}) => {
             <TextInput
               style={styles.singleField}
               onBlur={onBlur}
+              autoCapitalize="none"
               placeholderTextColor={
                 errors[name]?.message ? Colors.alert : Colors.placeholder
               }

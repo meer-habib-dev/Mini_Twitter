@@ -1,23 +1,47 @@
 import {AxiosRequestConfig} from 'axios';
-import {Alert} from 'react-native';
+
 import {
   useQuery,
   useMutation,
   useQueryClient,
   InvalidateQueryFilters,
+  useInfiniteQuery,
 } from 'react-query';
 import {api} from '../api/config';
 interface UsePostOptions extends AxiosRequestConfig {}
 function useApi() {
   const queryClient = useQueryClient();
 
+  function useLoadMore(url: any, query_key: string, options = {}) {
+    return useInfiniteQuery(
+      query_key,
+      async ({pageParam = 1}) => {
+        try {
+          return await api.get(url(pageParam), options);
+        } catch (error) {
+          return error;
+        }
+      },
+      {
+        getNextPageParam: (lastPage: any, allPages) => {
+          if (lastPage.length < 30) {
+            // If the last page didn't have 30 items, then we've reached the end of the data.
+            return undefined;
+          } else {
+            // Otherwise, we increment the page number and return it as the next page parameter.
+            const nextPage = allPages.length + 1;
+            return nextPage;
+          }
+        },
+      },
+    );
+  }
   function useGet(url: string, options = {}) {
     return useQuery([url, options], async () => {
       try {
-        const response = await api.get(url, options);
-        return response.data;
+        return await api.get(url, options);
       } catch (error) {
-        console.log('Error:', error);
+        return error;
       }
     });
   }
@@ -28,20 +52,19 @@ function useApi() {
   ) {
     return useMutation(
       async (data: any) => {
-        await api.post(url, data, options);
-        // try {
-        // } catch (error) {
-        //   console.error('Error:', error);
-        // }
+        try {
+          return await api.post(url, data, options);
+        } catch (error) {
+          return error;
+        }
       },
       {
         onSuccess: () => {
           queryClient.invalidateQueries(url);
-          onSuccess && onSuccess();
         },
-        onError: (error: any) => {
-          Alert.alert('Error!', error.message);
-        },
+        // onError: (error: any) => {
+        //   Alert.alert('Error!', error.message);
+        // },
       },
     );
   }
@@ -54,9 +77,9 @@ function useApi() {
     return useMutation(
       async () => {
         try {
-          await api.put(url as string, data, options);
+          return await api.put(url as string, data, options);
         } catch (error) {
-          console.error('Error:', error);
+          return error;
         }
       },
       {
@@ -74,9 +97,9 @@ function useApi() {
     return useMutation(
       async () => {
         try {
-          await api.delete(url as string, options);
+          return await api.delete(url as string, options);
         } catch (error) {
-          console.error('Error:', error);
+          return error;
         }
       },
       {
@@ -87,7 +110,7 @@ function useApi() {
     );
   }
 
-  return {useGet, usePost, usePut, useDelete};
+  return {useGet, usePost, usePut, useDelete, useLoadMore};
 }
 
 export default useApi;
