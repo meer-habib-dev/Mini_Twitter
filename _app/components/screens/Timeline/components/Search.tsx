@@ -1,12 +1,25 @@
-import {StyleSheet, View} from 'react-native';
+import {StyleSheet, TextInput, View} from 'react-native';
 import React from 'react';
-import {TextInput, TouchableOpacity} from 'react-native-gesture-handler';
+import {TouchableOpacity} from 'react-native-gesture-handler';
 import Icon from 'react-native-vector-icons/AntDesign';
 import FIcon from 'react-native-vector-icons/FontAwesome';
 import Colors from '../../../../@lib/constants/theme/Colors';
 import Text_Size from '../../../../@lib/utils/functions/textScaling';
 import {margins} from '../../../../@lib/constants';
-const Search = ({hanldePost}) => {
+import TInput from '../../../common/form/TInput';
+// import Yup from 'yup';
+import {useFormHandler} from '../../../../@lib/Hooks/useHookForm';
+import * as Yup from 'yup';
+import Loader from '../../../common/loader/Loader';
+import {ActivityIndicator} from 'react-native-paper';
+const Search = ({
+  hanldePost,
+  searchText,
+  handleSearchTextChange,
+  searchLoading,
+}) => {
+
+
   return (
     <View style={styles.container}>
       <View style={styles.inputContainer}>
@@ -16,7 +29,18 @@ const Search = ({hanldePost}) => {
           color={Colors.primary}
           style={styles.icon}
         />
-        <TextInput style={styles.singleField} />
+        <TextInput
+          value={searchText}
+          onChangeText={handleSearchTextChange}
+          style={styles.singleField}
+          placeholder="Search users..."
+        />
+        {searchLoading ? (
+          <ActivityIndicator
+            color={Colors.primary}
+            style={{marginRight: margins.sm}}
+          />
+        ) : null}
       </View>
       <TouchableOpacity onPress={hanldePost}>
         <Icon
@@ -46,6 +70,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     // marginHorizontal: 10,
     alignItems: 'center',
+    justifyContent: 'space-between',
     borderRadius: 50,
     backgroundColor: Colors.secondary,
     borderColor: Colors.background,

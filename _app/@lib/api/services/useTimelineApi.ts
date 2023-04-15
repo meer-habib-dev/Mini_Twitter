@@ -3,21 +3,38 @@ import useApi from '../../Hooks/useApi';
 
 export const useTimelineApi = () => {
   const api = useApi();
-  const {data, fetchNextPage, hasNextPage, isFetchingNextPage} =
-    api.useLoadMore(API_ENDPOINTS.GET_USERS, 'user');
+  const {
+    data,
+    fetchNextPage,
+    hasNextPage,
+    isFetchingNextPage,
+    isFetched,
+    isLoading,
+  } = api.useLoadMore(API_ENDPOINTS.GET_USERS, 'user');
+  const {
+    mutateAsync,
+    isLoading: tweetLoading,
+    isSuccess,
+  } = api.usePost(API_ENDPOINTS.POST_TWEET);
   function handleLoadMore() {
     if (hasNextPage && !isFetchingNextPage) {
       fetchNextPage();
     }
   }
+  async function onSubmit(payload: {tweet: string}) {
+    const r = await mutateAsync({
+      content: payload.tweet,
+    });
+  }
 
-  console.log(
-    'da',
-    data?.pages,
+  return {
     data,
-    fetchNextPage,
-    hasNextPage,
+    handleLoadMore,
+    isLoading,
+    isFetched,
+    onSubmit,
     isFetchingNextPage,
-  );
-  return {data, handleLoadMore};
+    tweetLoading,
+    isSuccess,
+  };
 };

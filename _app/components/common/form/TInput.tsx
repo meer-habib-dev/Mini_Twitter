@@ -4,7 +4,16 @@ import {Controller} from 'react-hook-form';
 import {Switch, TextInput} from 'react-native-gesture-handler';
 import Colors from '../../../@lib/constants/theme/Colors';
 
-const TInput = ({control, placeholder, password, name}) => {
+const TInput = ({
+  control,
+  placeholder,
+  password,
+  name,
+  style,
+  numberOfLines,
+  multiline,
+  fullWidth,
+}) => {
   const [showPass, setShowPass] = useState(password);
   function toggleSwitch() {
     setShowPass(!showPass);
@@ -17,21 +26,31 @@ const TInput = ({control, placeholder, password, name}) => {
       render={({field: {onChange, onBlur, value}, formState: {errors}}) => {
         return (
           <View
-            style={[
-              styles.singleField,
-
-              {
-                flexDirection: 'row',
-                justifyContent: 'space-between',
-                marginVertical: 10,
-                borderBottomWidth: errors[name]?.message ? 1 : 0.5,
-                borderBottomColor: errors[name]?.message
-                  ? Colors.alert
-                  : 'rgba(0,0,0,0.5)',
-              },
-            ]}>
+            style={
+              style
+                ? style
+                : [
+                    styles.singleField,
+                    {
+                      flexDirection: 'row',
+                      justifyContent: 'space-between',
+                      marginVertical: 10,
+                      borderBottomWidth: errors[name]?.message ? 1 : 0.5,
+                      borderBottomColor: errors[name]?.message
+                        ? Colors.alert
+                        : 'rgba(0,0,0,0.5)',
+                    },
+                  ]
+            }>
             <TextInput
-              style={styles.singleField}
+              style={[
+                styles.singleField,
+                {
+                  width: fullWidth ? '100%' : '80%',
+                  minHeight: multiline ? 200 : 40,
+                  maxHeight: multiline ? 200 : 40,
+                },
+              ]}
               onBlur={onBlur}
               autoCapitalize="none"
               placeholderTextColor={
@@ -41,8 +60,10 @@ const TInput = ({control, placeholder, password, name}) => {
               value={value}
               placeholder={placeholder}
               secureTextEntry={showPass}
+              numberOfLines={numberOfLines}
+              multiline={multiline}
             />
-            {password && (
+            {password ? (
               <Switch
                 trackColor={{
                   true: Colors.primary,
@@ -52,7 +73,7 @@ const TInput = ({control, placeholder, password, name}) => {
                 onValueChange={toggleSwitch}
                 value={!showPass}
               />
-            )}
+            ) : null}
           </View>
         );
       }}
@@ -64,9 +85,7 @@ export default TInput;
 
 const styles = StyleSheet.create({
   singleField: {
-    width: '80%',
     color: '#000000',
-    height: 40,
 
     fontSize: 17,
   },

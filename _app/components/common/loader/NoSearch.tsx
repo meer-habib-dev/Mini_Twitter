@@ -5,24 +5,23 @@ import {_JSON} from '../../../@lib/assets/json';
 
 interface Props {
   height?: number;
-  primary?: Boolean;
 }
-const Loader = ({height, primary}: Props) => {
+const NoSeachResult = ({height}: Props) => {
   return (
     <View style={styles.loaderContainer}>
       <Lottie
         style={{
-          height: height ? height : 70,
+          height: height ? height : 300,
         }}
-        source={primary ? _JSON.loaderPrimary : _JSON.loader}
+        source={_JSON.nosearch}
         autoPlay
-        loop
+        loop={false}
       />
     </View>
   );
 };
 
-export default Loader;
+export default NoSeachResult;
 
 const styles = StyleSheet.create({
   loaderContainer: {alignItems: 'center', flex: 1, justifyContent: 'center'},

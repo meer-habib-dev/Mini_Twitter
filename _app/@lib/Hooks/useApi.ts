@@ -24,12 +24,12 @@ function useApi() {
       },
       {
         getNextPageParam: (lastPage: any, allPages) => {
-          if (lastPage.length < 30) {
+          if (lastPage?.data?.count < 30) {
             // If the last page didn't have 30 items, then we've reached the end of the data.
             return undefined;
           } else {
             // Otherwise, we increment the page number and return it as the next page parameter.
-            const nextPage = allPages.length + 1;
+            const nextPage = allPages?.length + 1;
             return nextPage;
           }
         },

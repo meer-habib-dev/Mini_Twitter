@@ -1,6 +1,6 @@
-import {Image, StyleSheet, Text, View} from 'react-native';
+import {Image, StyleSheet, View} from 'react-native';
 import React from 'react';
-import {Button, Card} from 'react-native-paper';
+import {Card} from 'react-native-paper';
 import TitleText from '../../../common/text/TitleText';
 import ShortText from '../../../common/text/ShortText';
 import Verified from 'react-native-vector-icons/MaterialIcons';
@@ -9,39 +9,45 @@ import Colors from '../../../../@lib/constants/theme/Colors';
 import {margins} from '../../../../@lib/constants';
 import HeaderText from '../../../common/text/HeaderText';
 import {TouchableOpacity} from 'react-native-gesture-handler';
-
-const PostCard = () => {
+import {getTimeSince} from '../../../../@lib/utils/functions/getTimeSince';
+import {getEmailDomain} from '../../../../@lib/utils/functions/getEmailDomain';
+interface Props {
+  item: {
+    id: number;
+    email: string;
+    username: string;
+    active: boolean;
+    join_date: string;
+  };
+}
+const PostCard = ({item}: Props) => {
   return (
-    <Card style={{backgroundColor: Colors.secondary, marginBottom: margins.md}}>
+    <Card style={styles.card}>
       <Card.Content>
         {/* User Info */}
-        <View style={{flexDirection: 'row', alignItems: 'center'}}>
+        <View style={styles.imageContiner}>
           <Image
             source={{
-              uri: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80',
+              uri: 'https://picsum.photos/',
+              // uri: 'https://placeimg.com/640/480/people',
             }}
-            style={{
-              width: 60,
-              height: 60,
-              borderRadius: 100,
-              marginRight: margins.sm,
-            }}
+            style={styles.image}
           />
-          <View style={{flex: 1}}>
-            <View style={{flexDirection: 'row'}}>
-              <TitleText
-                text={'CrickBuzz'}
-                textStyle={{fontWeight: 'bold', marginRight: margins.sm}}
-              />
+          <View style={styles.textContainer}>
+            <View style={styles.title}>
+              <TitleText text={item?.username} textStyle={styles.text} />
               <Verified name="verified" size={20} color={Colors.primary} />
             </View>
-            <ShortText text={'@cricbuzz'} />
+            <ShortText text={getEmailDomain(item?.email)} />
           </View>
-          <ShortText textStyle={{marginRight: margins.md}} text={'2 min age'} />
+          <ShortText
+            textStyle={styles.shortText}
+            text={getTimeSince(new Date(item?.join_date))}
+          />
         </View>
         {/* dummy Text */}
 
-        <View style={{marginVertical: margins.md}}>
+        <View style={styles.header}>
           <HeaderText
             text={
               'This is my twitter account do not spam in here. Otherwise i will knock Elon'
@@ -51,13 +57,7 @@ const PostCard = () => {
         {/* image */}
         <Card.Cover source={{uri: 'https://picsum.photos/700'}} />
         {/* dummy bottons */}
-        <View
-          style={{
-            flexDirection: 'row',
-            flex: 0,
-            justifyContent: 'space-between',
-            marginTop: margins.md,
-          }}>
+        <View style={styles.btnCard}>
           <TouchableOpacity>
             <Verified name="message" size={30} />
           </TouchableOpacity>
@@ -78,4 +78,28 @@ const PostCard = () => {
 
 export default PostCard;
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  card: {
+    backgroundColor: Colors.secondary,
+    marginBottom: margins.md,
+    marginHorizontal: 1.5,
+  },
+  imageContiner: {flexDirection: 'row', alignItems: 'center'},
+  image: {
+    width: 60,
+    height: 60,
+    borderRadius: 100,
+    marginRight: margins.sm,
+  },
+  btnCard: {
+    flexDirection: 'row',
+    flex: 0,
+    justifyContent: 'space-between',
+    marginTop: margins.md,
+  },
+  textContainer: {flex: 1},
+  title: {flexDirection: 'row'},
+  text: {fontWeight: 'bold', marginRight: margins.sm},
+  shortText: {marginRight: margins.md},
+  header: {marginVertical: margins.md},
+});

@@ -29,17 +29,13 @@ const TBottomSheet = ({isVisible, onClose, children}) => {
   }, [isVisible]);
 
   return (
-    <View
-      style={{
-        flex: 1,
-        backgroundColor: isVisible ? 'rgba(0, 0, 0, 0.5)' : 'transparent',
-      }}>
+    <View>
       <TouchableOpacity style={[styles.backdrop]} onPress={onClose} />
       <Animated.View style={[styles.bottomSheet, animatedStyle]}>
         <TouchableOpacity onPress={onClose}>
           <View style={styles.dragHandle} />
         </TouchableOpacity>
-        {children}
+        <View style={styles.childWrapper}>{children}</View>
       </Animated.View>
     </View>
   );
@@ -55,13 +51,15 @@ const styles = StyleSheet.create({
     left: 0,
     right: 0,
     height: 500,
-    backgroundColor: '#FFFFFF',
-    borderTopLeftRadius: 16,
-    borderTopRightRadius: 16,
+    width: '100%',
+    backgroundColor: Colors.iosBG,
+    // borderTopLeftRadius: 16,
+    // borderTopRightRadius: 16,
     padding: 16,
     justifyContent: 'flex-start',
     alignItems: 'center',
   },
+  childWrapper: {width: '100%', flex: 1},
   dragHandle: {
     width: 48,
     height: 4,

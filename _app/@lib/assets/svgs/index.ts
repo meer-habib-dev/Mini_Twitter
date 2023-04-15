@@ -1,3 +1,3 @@
 export const _SVGS = {
-  loader: require('./src/loader.json'),
+  // loader: require('./src/loader.json'),
 };
