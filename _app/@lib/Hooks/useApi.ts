@@ -7,17 +7,23 @@ import {
   InvalidateQueryFilters,
   useInfiniteQuery,
 } from 'react-query';
-import {api} from '../api/config';
+import api from '../api/config';
+import {getStorageItem} from '../utils/functions/storage';
 interface UsePostOptions extends AxiosRequestConfig {}
 function useApi() {
   const queryClient = useQueryClient();
-
+  const token = getStorageItem('auth-token', 'str');
   function useLoadMore(url: any, query_key: string, options = {}) {
     return useInfiniteQuery(
       query_key,
       async ({pageParam = 1}) => {
         try {
-          return await api.get(url(pageParam), options);
+          if (token) {
+            console.log('yes toekn', token);
+            return await api.get(url(pageParam), options);
+          } else {
+            console.log('no token', token);
+          }
         } catch (error) {
           return error;
         }
@@ -62,9 +68,6 @@ function useApi() {
         onSuccess: () => {
           queryClient.invalidateQueries(url);
         },
-        // onError: (error: any) => {
-        //   Alert.alert('Error!', error.message);
-        // },
       },
     );
   }

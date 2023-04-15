@@ -18,10 +18,9 @@ export type RootStackParamList = {
 const RootStack = createNativeStackNavigator<RootStackParamList>();
 const RootNavigator = () => {
   const token = getStorageItem('auth-token', 'str');
-  console.log('tokn', token);
+
   return (
     <RootStack.Navigator
-      // initialRouteName={true ? 'Main' : 'Authentication'}
       initialRouteName={token ? 'Main' : 'Authentication'}
       screenOptions={{
         gestureDirection: 'horizontal',

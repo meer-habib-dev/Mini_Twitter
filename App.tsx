@@ -12,8 +12,9 @@ import RootNavigator from './_app/components/navigation/StackNavigator/RootNavig
 import {NavigationContainer} from '@react-navigation/native';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
 import {Provider as PaperProvider} from 'react-native-paper';
-import {QueryClient, QueryClientProvider, useQuery} from 'react-query';
+import {QueryClient, QueryClientProvider} from 'react-query';
 
+import Toast from 'react-native-toast-message';
 const queryClient = new QueryClient();
 
 function App(): JSX.Element {
@@ -26,6 +27,7 @@ function App(): JSX.Element {
           </QueryClientProvider>
         </PaperProvider>
       </NavigationContainer>
+      <Toast />
     </SafeAreaProvider>
   );
 }

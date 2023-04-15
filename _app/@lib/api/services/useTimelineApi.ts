@@ -1,8 +1,12 @@
+import {useEffect, useState} from 'react';
 import Toast from 'react-native-toast-message';
 import {API_ENDPOINTS} from '../../constants/api_endpoint';
 import useApi from '../../Hooks/useApi';
+import {getStorageItem} from '../../utils/functions/storage';
 
 export const useTimelineApi = () => {
+  const [token, setToken] = useState(getStorageItem('auth-token', 'str'));
+  // console.log('first', token);
   const api = useApi();
   const {
     data,
@@ -23,6 +27,7 @@ export const useTimelineApi = () => {
       fetchNextPage();
     }
   }
+  console.log('data', data);
   async function onSubmit(payload: {tweet: string}) {
     const response: any = await mutateAsync({
       content: payload.tweet,
@@ -43,6 +48,12 @@ export const useTimelineApi = () => {
       await refetch();
     }
   }
+  // console.log('init', token);
+
+  // if (data?.pages?.[0]?.data?.error) {
+  //   refetch();
+  // }
+  // console.log('datadata?.pages?.[0]', data?.pages?.[0]?.data?.error);
 
   return {
     data,

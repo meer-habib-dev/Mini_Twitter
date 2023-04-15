@@ -27,19 +27,18 @@ import LoginComponent from './components/LoginComponent';
 import RegistrationComponent from './components/RegistrationComponent';
 
 const Authentication = () => {
-  const [index, setIndex] = useState(0);
   const [routes] = useState([
     {key: 'login', text: 'LOGIN'},
     {key: 'register', text: 'REGISTRATION'},
   ]);
-  const {onSubmit, isLoading, data} = useAuthApi(index);
+  const {onSubmit, isLoading, data, index, setIndex} = useAuthApi();
 
   const _renderTitle = ({route}) => {
     return (
       <TitleText
         textStyle={{
           fontFamily: 'SinewsSansProDEMO-Medium',
-          fontSize: 14,
+          fontSize: 20,
           color: '#454545',
           fontWeight: '900',
         }}
@@ -125,9 +124,7 @@ const Authentication = () => {
         return null;
     }
   };
-  useEffect(() => {
-    setIndex(0);
-  }, [data]);
+ 
 
   return (
     <View style={{flex: 1, backgroundColor: 'white'}}>

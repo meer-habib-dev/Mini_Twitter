@@ -10,7 +10,6 @@ import TBottomSheet from '../../common/modal/TBottomSheet';
 import {useTimelineApi} from '../../../@lib/api/services/useTimelineApi';
 import CardSkeleton from '../../common/loader/CardSkeleton';
 import ReusableFlatList from '../../common/ScrollComponent/ReusableFlatList';
-
 import {useSearchUser} from '../../../@lib/api/services/useSearchUser';
 import HeaderText from '../../common/text/HeaderText';
 import Text_Size from '../../../@lib/utils/functions/textScaling';
@@ -47,7 +46,6 @@ const Timeline = () => {
     ? searchedUser?.response?.data?.error
     : null;
   const searchCount = searchedUser?.data?.count;
-
   return (
     <SafeArea style={styles.container}>
       {/* Search */}
@@ -60,6 +58,7 @@ const Timeline = () => {
       />
 
       {/* Card */}
+
       <ReusableFlatList
         // style={{flex: 1}}
         data={flatlistData}
@@ -76,23 +75,24 @@ const Timeline = () => {
             followText={'Follow'}
           />
         )}
-        keyExtractor={(item: {id: any}, index: any) =>
-          (item?.id + item?.content).toString()
+        keyExtractor={(item: {id: any}, ind: any) =>
+          (
+            item?.id +
+            (searchEnable ? item.username : item?.content) +
+            ind
+          ).toString()
         }
         onEndReached={handleLoadMore}
         ListFooterComponent={isFetchingNextPage ? <CardSkeleton /> : null}
         ListEmptyComponent={
           searchCount === 0 ? (
-            <>
+            <View style={{marginTop: '45%'}}>
               <NoSeachResult />
-            </>
+            </View>
           ) : seachError ? (
             <View
               style={{
-                justifyContent: 'center',
-                alignItems: 'center',
-                height: '100%',
-                flex: 1,
+                marginTop: '10%',
               }}>
               <HeaderText
                 text={seachError}
@@ -100,6 +100,7 @@ const Timeline = () => {
                   fontWeight: 'bold',
                   color: Colors.primary,
                   fontSize: Text_Size.Text_6,
+                  textAlign: 'center',
                 }}
               />
             </View>
@@ -108,6 +109,7 @@ const Timeline = () => {
           ) : null
         }
       />
+
       <FAB
         icon="twitter"
         color={Colors.secondary}

@@ -3,9 +3,11 @@ import {Alert} from 'react-native';
 import {API_ENDPOINTS} from '../../constants/api_endpoint';
 import useApi from '../../Hooks/useApi';
 import {setStorageItem} from '../../utils/functions/storage';
-
-function useAuthApi(authIndex: number) {
+import Toast from 'react-native-toast-message';
+import {useState} from 'react';
+function useAuthApi() {
   const api = useApi();
+  const [index, setIndex] = useState(0);
   const navigation = useNavigation();
 
   const {
@@ -15,7 +17,7 @@ function useAuthApi(authIndex: number) {
 
     mutateAsync,
   } = api.usePost(
-    authIndex === 1 ? API_ENDPOINTS.POST_SIGNUP : API_ENDPOINTS.POST_LOGIN,
+    index === 1 ? API_ENDPOINTS.POST_SIGNUP : API_ENDPOINTS.POST_LOGIN,
   );
   async function onSubmit(payload: {
     username?: string;
@@ -25,11 +27,11 @@ function useAuthApi(authIndex: number) {
   }) {
     const {email, username, password} = payload;
     const reqPayload =
-      authIndex === 0 ? {email, password} : {email, username, password};
+      index === 0 ? {email, password} : {email, username, password};
     const result: any = await mutateAsync(reqPayload);
 
     if (result.status === 200 || result.status === 201) {
-      if (authIndex === 0) {
+      if (index === 0) {
         const timestamp = Date.now();
         setStorageItem('auth-token', result?.data?.token);
         setStorageItem('auth-token-timestamp', timestamp);
@@ -41,13 +43,19 @@ function useAuthApi(authIndex: number) {
             screen: 'Timeline',
           }),
         );
+      } else {
+        setIndex(0);
       }
     } else {
-      Alert.alert('Error!', result?.data.message);
+      Toast.show({
+        type: 'error',
+        text1: index === 0 ? 'Login' : 'Sign in',
+        text2: result?.response?.data.error,
+      });
     }
   }
 
-  return {onSubmit, isLoading, data, error};
+  return {onSubmit, isLoading, data, error, index, setIndex};
 }
 
 export default useAuthApi;

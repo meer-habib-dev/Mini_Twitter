@@ -1,6 +1,6 @@
 /* eslint-disable react-native/no-inline-styles */
 import {StyleSheet, View} from 'react-native';
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import Colors from '../../../../@lib/constants/theme/Colors';
 import {margins} from '../../../../@lib/constants';
 import HeaderText from '../../../common/text/HeaderText';
@@ -9,6 +9,12 @@ import {getStorageItem} from '../../../../@lib/utils/functions/storage';
 const ProfileFollow = () => {
   const follower = getStorageItem('follower', 'num');
   const following = getStorageItem('following', 'num');
+  const [followState, setFollowState] = useState(0);
+  const [followingState, setFollowingState] = useState(0);
+  useEffect(() => {
+    setFollowState(follower);
+    setFollowingState(following);
+  }, [follower, following]);
   return (
     <View
       style={{
@@ -27,7 +33,7 @@ const ProfileFollow = () => {
             color: Colors.secondary,
             marginRight: margins.xs,
           }}
-          text={follower}
+          text={followState}
         />
         <HeaderText textStyle={{color: Colors.secondary}} text={'Following'} />
       </View>
@@ -38,7 +44,7 @@ const ProfileFollow = () => {
             color: Colors.secondary,
             marginRight: margins.xs,
           }}
-          text={following}
+          text={followingState}
         />
         <HeaderText textStyle={{color: Colors.secondary}} text={'Following'} />
       </View>

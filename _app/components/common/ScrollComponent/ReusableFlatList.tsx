@@ -16,31 +16,17 @@ const ReusableFlatList: React.FC<Props> = ({
   data,
   renderItem,
   keyExtractor,
-  // onRefresh,
-  // refreshing = false,
+
   onEndReached,
   ListEmptyComponent,
   ListFooterComponent,
 }) => {
-  // const [isRefreshing, setIsRefreshing] = useState(refreshing);
-
-  // useEffect(() => {
-  //   setIsRefreshing(refreshing);
-  // }, [refreshing]);
-
-  // const handleRefresh = () => {
-  //   setIsRefreshing(true);
-  //   onRefresh && onRefresh();
-  // };
-
   return (
     <FlatList
       style={styles.empty}
       data={data}
       renderItem={renderItem}
       keyExtractor={keyExtractor}
-      // onRefresh={handleRefresh}
-      // refreshing={isRefreshing}
       onEndReachedThreshold={0.5}
       onEndReached={onEndReached}
       showsVerticalScrollIndicator={false}
@@ -52,7 +38,7 @@ const ReusableFlatList: React.FC<Props> = ({
 };
 
 const styles = StyleSheet.create({
-  empty: {},
+  empty: {flexGrow: 1},
 });
 
 export default ReusableFlatList;
