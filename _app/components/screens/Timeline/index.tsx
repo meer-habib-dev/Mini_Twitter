@@ -30,12 +30,12 @@ const Timeline = () => {
   } = useTimelineApi();
   const {
     searchLoading,
-    status,
+
     searchedUser,
     searchText,
     handleSearchTextChange,
   } = useSearchUser();
-  const {handleFollowUnfollow} = useFollowUnfollowApi();
+  const {handleFollow} = useFollowUnfollowApi();
   function hanldePost() {
     setPost(prev => !prev);
   }
@@ -47,7 +47,7 @@ const Timeline = () => {
     ? searchedUser?.response?.data?.error
     : null;
   const searchCount = searchedUser?.data?.count;
-  console.log('serach', status, searchText, searchedUser);
+  console.log('serach');
   return (
     <SafeArea style={styles.container}>
       {/* Search */}
@@ -65,8 +65,10 @@ const Timeline = () => {
         renderItem={({item}) => (
           <PostCard
             item={item}
-            handleFollowUnfollow={() => handleFollowUnfollow({id: item.id})}
-            followText={true ? 'Follow' : 'Unfollow'}
+            handleFollow={() =>
+              handleFollow({id: item?.id, username: item?.username})
+            }
+            followText={'Follow'}
           />
         )}
         keyExtractor={(item: {id: any}, index: any) =>

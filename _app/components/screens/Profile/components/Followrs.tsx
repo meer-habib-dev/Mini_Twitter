@@ -1,19 +1,20 @@
-import {FlatList, StyleSheet, Text, View} from 'react-native';
+import {FlatList, Image, StyleSheet, Text, View} from 'react-native';
 import React from 'react';
 import {margins} from '../../../../@lib/constants';
-import {Avatar, Card, IconButton} from 'react-native-paper';
+import {Avatar, Card} from 'react-native-paper';
 import Colors from '../../../../@lib/constants/theme/Colors';
 import Text_Size from '../../../../@lib/utils/functions/textScaling';
 import {useGetFollowersApi} from '../../../../@lib/api/services/useGetFollowersApi';
 import ReusableFlatList from '../../../common/ScrollComponent/ReusableFlatList';
 import NoSeachResult from '../../../common/loader/NoSearch';
+import CardTitleSkeleton from '../../../common/loader/CardTitleSkeleton';
 
 const Followrs = () => {
   const {data, isLoading, handleLoadMore} = useGetFollowersApi();
   console.log('follwer', data);
   const flatListData = data?.pages?.flatMap(page => page?.data?.followers)!;
   const followerCount = flatListData?.length;
-  function _renderItem() {
+  function _renderItem({item}) {
     return (
       <Card
         style={{
@@ -22,8 +23,8 @@ const Followrs = () => {
           marginVertical: margins.sm,
         }}>
         <Card.Title
-          title="Meer Habib"
-          subtitle="meerhabib200@gmail.com"
+          title={item?.username}
+          subtitle={item?.email}
           titleStyle={{
             fontWeight: '600',
           }}
@@ -31,10 +32,15 @@ const Followrs = () => {
             fontSize: Text_Size.Text_8,
             color: Colors.gray,
           }}
-          left={props => <Avatar.Icon {...props} icon="folder" />}
-          // right={props => (
-          //   <IconButton {...props} icon="dots-vertical" onPress={() => {}} />
-          // )}
+          left={props => (
+            <Image
+              {...props}
+              source={{
+                uri: 'https://placeimg.com/640/480/people',
+              }}
+              style={styles.image}
+            />
+          )}
         />
       </Card>
     );
@@ -51,7 +57,13 @@ const Followrs = () => {
             <>
               <NoSeachResult />
             </>
-          ) : null
+          ) : isLoading ? (
+            <>
+              <CardTitleSkeleton />
+            </>
+          ) : (
+            <NoSeachResult />
+          )
         }
       />
     </View>

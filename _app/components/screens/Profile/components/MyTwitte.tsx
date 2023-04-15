@@ -10,6 +10,7 @@ import NoSeachResult from '../../../common/loader/NoSearch';
 import {getTimeSince} from '../../../../@lib/utils/functions/getTimeSince';
 import Text_Size from '../../../../@lib/utils/functions/textScaling';
 import {margins} from '../../../../@lib/constants';
+import CardContentSkeleton from '../../../common/loader/CardContentSkeleton';
 
 const MyTwitte = () => {
   const {data, isLoading, handleLoadMore} = useMyTweetApi();
@@ -27,14 +28,14 @@ const MyTwitte = () => {
         <Card.Content>
           <TitleText
             textStyle={{marginBottom: margins.md, fontSize: Text_Size.Text_2}}
-            text={item.content}
+            text={item?.content}
           />
         </Card.Content>
 
         <Card.Content
           style={{flexDirection: 'row', justifyContent: 'flex-end'}}>
           <ShortText
-            text={getTimeSince(new Date(item.published))}
+            text={getTimeSince(new Date(item?.published))}
             textStyle={{marginRight: margins.xs}}
           />
           <TitleText text={'@' + item?.user?.username} />
@@ -54,7 +55,11 @@ const MyTwitte = () => {
             <>
               <NoSeachResult />
             </>
-          ) : null
+          ) : isLoading ? (
+            <CardContentSkeleton />
+          ) : (
+            <NoSeachResult />
+          )
         }
       />
     </View>

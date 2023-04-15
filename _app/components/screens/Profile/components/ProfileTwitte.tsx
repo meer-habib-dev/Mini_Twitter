@@ -10,7 +10,7 @@ import Followrs from './Followrs';
 import Following from './Following';
 import Text_Size from '../../../../@lib/utils/functions/textScaling';
 
-const ProfileTwitte = () => {
+const ProfileTwitte = ({}) => {
   const [index, setIndex] = React.useState(0);
   const [routes] = React.useState([
     {key: 'mytwitte', text: 'My Twitte'},

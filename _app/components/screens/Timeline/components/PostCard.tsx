@@ -19,14 +19,10 @@ interface Props {
     active: boolean;
     join_date: string;
   };
-  handleFollowUnfollow: () => void;
+  handleFollow: () => void;
   followText: string;
 }
-const PostCard = ({
-  item,
-  handleFollowUnfollow,
-  followText = 'Follow',
-}: Props) => {
+const PostCard = ({item, handleFollow, followText = 'Follow'}: Props) => {
   return (
     <Card style={styles.card}>
       <Card.Content>
@@ -34,7 +30,7 @@ const PostCard = ({
         <View style={styles.imageContiner}>
           <Image
             source={{
-              uri: 'https://picsum.photos/',
+              uri: 'https://placeimg.com/640/480/people',
               // uri: 'https://placeimg.com/640/480/people',
             }}
             style={styles.image}
@@ -47,7 +43,7 @@ const PostCard = ({
             <ShortText text={getEmailDomain(item?.email)} />
           </View>
           <View>
-            <TouchableOpacity onPress={handleFollowUnfollow}>
+            <TouchableOpacity onPress={handleFollow}>
               <HeaderText
                 textStyle={{
                   fontWeight: 'bold',
@@ -57,6 +53,7 @@ const PostCard = ({
                 text={followText}
               />
             </TouchableOpacity>
+
             <ShortText
               textStyle={styles.shortText}
               text={getTimeSince(new Date(item?.join_date))}
