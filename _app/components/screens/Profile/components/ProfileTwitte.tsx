@@ -1,5 +1,5 @@
 /* eslint-disable react-native/no-inline-styles */
-import {StyleSheet, View} from 'react-native';
+import {Image, StyleSheet, View} from 'react-native';
 import React from 'react';
 import Colors from '../../../../@lib/constants/theme/Colors';
 import {margins} from '../../../../@lib/constants';
@@ -9,6 +9,8 @@ import MyTwitte from './MyTwitte';
 import Followrs from './Followrs';
 import Following from './Following';
 import Text_Size from '../../../../@lib/utils/functions/textScaling';
+import Users from './Users';
+import {_IMAGE} from '../../../../@lib/assets/images';
 
 const ProfileTwitte = ({}) => {
   const [index, setIndex] = React.useState(0);
@@ -16,18 +18,35 @@ const ProfileTwitte = ({}) => {
     {key: 'mytwitte', text: 'My Twitte'},
     {key: 'followers', text: 'Followers'},
     {key: 'following', text: 'Following'},
+    {key: 'users', text: 'Users'},
   ]);
+  const _renderTitleIcon = ({key}) => {
+    switch (key) {
+      case 'mytwitte':
+        return _IMAGE.mytweet;
+      case 'followers':
+        return _IMAGE.followers;
+      case 'following':
+        return _IMAGE.following;
+      case 'users':
+        return _IMAGE.user;
+
+      default:
+        return null;
+    }
+  };
   const _renderTitle = ({route}) => {
     // console.log('r', route);
     return (
-      <TitleText
-        textStyle={{
-          fontSize: Text_Size.Text_0,
-          color: routes[index].key === route.key ? Colors.primary : Colors.text,
-          fontWeight: routes[index].key === route.key ? 'bold' : 'normal',
-        }}
-        text={route.text}
-      />
+      // <TitleText
+      //   textStyle={{
+      //     fontSize: Text_Size.Text_0,
+      //     color: routes[index].key === route.key ? Colors.primary : Colors.text,
+      //     fontWeight: routes[index].key === route.key ? 'bold' : 'normal',
+      //   }}
+      //   text={route.text}
+      // />
+      <Image style={{width: 30, height: 30}} source={_renderTitleIcon(route)} />
     );
   };
   const _renderHeader = props => {
@@ -50,6 +69,8 @@ const ProfileTwitte = ({}) => {
         return <Followrs />;
       case 'following':
         return <Following />;
+      case 'users':
+        return <Users />;
 
       default:
         return null;

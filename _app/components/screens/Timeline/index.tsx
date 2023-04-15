@@ -17,7 +17,7 @@ import Text_Size from '../../../@lib/utils/functions/textScaling';
 import {View} from 'react-native';
 import NoSeachResult from '../../common/loader/NoSearch';
 import PostATweet from './components/PostATweet';
-import {useFollowUnfollowApi} from '../../../@lib/api/services/useFollowUnfollowApi';
+import {useFollowApi} from '../../../@lib/api/services/useFollowApi';
 const Timeline = () => {
   const [post, setPost] = useState(false);
   const {
@@ -35,19 +35,19 @@ const Timeline = () => {
     searchText,
     handleSearchTextChange,
   } = useSearchUser();
-  const {handleFollow} = useFollowUnfollowApi();
+  const {handleFollow} = useFollowApi();
   function hanldePost() {
     setPost(prev => !prev);
   }
   const flatlistData =
     searchText?.length > 0
       ? searchedUser?.data?.search_results
-      : data?.pages?.flatMap(page => page?.data?.users)! || [];
+      : data?.pages?.flatMap(page => page?.data?.timeline)! || [];
   const seachError = searchedUser?.response?.data?.error
     ? searchedUser?.response?.data?.error
     : null;
   const searchCount = searchedUser?.data?.count;
-  console.log('serach');
+  console.log('serach', flatlistData);
   return (
     <SafeArea style={styles.container}>
       {/* Search */}
@@ -66,13 +66,13 @@ const Timeline = () => {
           <PostCard
             item={item}
             handleFollow={() =>
-              handleFollow({id: item?.id, username: item?.username})
+              handleFollow(item?.user?.id, item?.user?.username)
             }
             followText={'Follow'}
           />
         )}
         keyExtractor={(item: {id: any}, index: any) =>
-          (item?.id + index).toString()
+          (item?.id + item?.content).toString()
         }
         onEndReached={handleLoadMore}
         ListFooterComponent={isFetchingNextPage ? <CardSkeleton /> : null}

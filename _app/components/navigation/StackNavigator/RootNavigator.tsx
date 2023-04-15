@@ -13,6 +13,7 @@ export type RootStackParamList = {
   Authentication: undefined;
   Profile: undefined;
   Timeline: undefined;
+  MyTimeline: undefined;
 };
 const RootStack = createNativeStackNavigator<RootStackParamList>();
 const RootNavigator = () => {
@@ -27,28 +28,28 @@ const RootNavigator = () => {
       }}>
       <RootStack.Group>
         <RootStack.Screen name="Main" component={TabNavigator} />
-      </RootStack.Group>
-      <RootStack.Screen
-        options={({navigation}) => ({
-          title: 'Details',
-          header: () => (
-            <HeaderWithBack navigation={navigation} title="Details" />
-          ),
-        })}
-        name="Profile"
-        component={Profile}
-      />
-      <RootStack.Screen
-        options={({navigation}) => ({
-          title: 'Timeline',
-          header: () => (
-            <HeaderWithBack navigation={navigation} title="Post Planet" />
-          ),
-        })}
-        name="Timeline"
-        component={Timeline}
-      />
-      <RootStack.Group>
+
+        <RootStack.Screen
+          options={({navigation}) => ({
+            title: 'Details',
+            header: () => (
+              <HeaderWithBack navigation={navigation} title="Details" />
+            ),
+          })}
+          name="Profile"
+          component={Profile}
+        />
+        <RootStack.Screen
+          options={({navigation}) => ({
+            title: 'Timeline',
+            header: () => (
+              <HeaderWithBack navigation={navigation} title="Post Planet" />
+            ),
+          })}
+          name="Timeline"
+          component={Timeline}
+        />
+
         <RootStack.Screen
           options={{
             headerShown: false,

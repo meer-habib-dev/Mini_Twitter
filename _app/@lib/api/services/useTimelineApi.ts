@@ -10,7 +10,7 @@ export const useTimelineApi = () => {
     isFetchingNextPage,
     isFetched,
     isLoading,
-  } = api.useLoadMore(API_ENDPOINTS.GET_USERS, 'user');
+  } = api.useLoadMore(API_ENDPOINTS.GET_MYTTIMELINE, 'timeline');
   const {
     mutateAsync,
     isLoading: tweetLoading,
@@ -21,6 +21,7 @@ export const useTimelineApi = () => {
       fetchNextPage();
     }
   }
+  console.log('data', data);
   async function onSubmit(payload: {tweet: string}) {
     const r = await mutateAsync({
       content: payload.tweet,

@@ -1,11 +1,15 @@
-import {Image, StyleSheet, Text, View} from 'react-native';
+import {Image, StyleSheet, View} from 'react-native';
 import React from 'react';
 import TitleText from '../../../common/text/TitleText';
 import ShortText from '../../../common/text/ShortText';
 import {margins} from '../../../../@lib/constants';
 import Text_Size from '../../../../@lib/utils/functions/textScaling';
 
+import {useNavigation} from '@react-navigation/native';
+
 const ProfileInfo = () => {
+  const navigation = useNavigation();
+
   return (
     <View
       style={{
@@ -20,6 +24,7 @@ const ProfileInfo = () => {
         }}
         style={{width: 80, height: 80, borderRadius: 100}}
       />
+
       <TitleText
         textStyle={{
           fontWeight: 'bold',
@@ -28,6 +33,7 @@ const ProfileInfo = () => {
         }}
         text={'Meer Habib'}
       />
+
       <ShortText text={'@meerhabib'} textStyle={{fontWeight: 'bold'}} />
       <ShortText text="React Native Developer | React Doctor" />
     </View>

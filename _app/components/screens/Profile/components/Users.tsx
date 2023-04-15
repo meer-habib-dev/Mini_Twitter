@@ -1,30 +1,36 @@
-import {Image, StyleSheet, Text, View} from 'react-native';
+import {Image, StyleSheet, View} from 'react-native';
 import React from 'react';
-import {margins} from '../../../../@lib/constants';
 import {Card} from 'react-native-paper';
+import {margins} from '../../../../@lib/constants';
 import Colors from '../../../../@lib/constants/theme/Colors';
 import Text_Size from '../../../../@lib/utils/functions/textScaling';
-import {useGetFollowersApi} from '../../../../@lib/api/services/useGetFollowersApi';
-import ReusableFlatList from '../../../common/ScrollComponent/ReusableFlatList';
+import {TouchableOpacity} from 'react-native';
 import NoSeachResult from '../../../common/loader/NoSearch';
+import ReusableFlatList from '../../../common/ScrollComponent/ReusableFlatList';
+import {_IMAGE} from '../../../../@lib/assets/images';
 import CardTitleSkeleton from '../../../common/loader/CardTitleSkeleton';
+import {useUsersApi} from '../../../../@lib/api/services/useUserApi';
+import {useFollowApi} from '../../../../@lib/api/services/useFollowApi';
 
-const Followrs = () => {
-  const {data, isLoading, handleLoadMore} = useGetFollowersApi();
-  console.log('follwer', data);
-  const flatListData = data?.pages?.flatMap(page => page?.data?.followers)!;
-  const followerCount = flatListData?.length;
-  function _renderItem({item}) {
+const Users = () => {
+  const {data, isLoading, handleLoadMore} = useUsersApi();
+  const {handleFollow} = useFollowApi();
+  const flatListData = data?.pages?.flatMap(page => page?.data?.users)!;
+
+  const userCount = flatListData?.length;
+  console.log('user', flatListData);
+  function _renderItem({item}: any) {
     return (
       <Card
         style={{
           margin: margins.xs,
           backgroundColor: Colors.secondary,
           marginVertical: margins.sm,
+          paddingVertical: margins.sm,
         }}>
         <Card.Title
           title={item?.username}
-          subtitle={item?.email}
+          subtitle={item.email}
           titleStyle={{
             fontWeight: '600',
           }}
@@ -41,6 +47,16 @@ const Followrs = () => {
               style={styles.image}
             />
           )}
+          right={props => (
+            <TouchableOpacity
+              onPress={() => handleFollow(item.id, item.username)}>
+              <Image
+                {...props}
+                source={_IMAGE.following}
+                style={styles.unfollow}
+              />
+            </TouchableOpacity>
+          )}
         />
       </Card>
     );
@@ -53,7 +69,7 @@ const Followrs = () => {
         keyExtractor={(item, index) => index.toString()}
         onEndReached={handleLoadMore}
         ListEmptyComponent={
-          followerCount === 0 ? (
+          userCount === 0 ? (
             <>
               <NoSeachResult />
             </>
@@ -70,6 +86,23 @@ const Followrs = () => {
   );
 };
 
-export default Followrs;
+export default Users;
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  image: {
+    width: 46,
+    height: 46,
+    // width: '110%',
+    // height: '110%',
+    borderRadius: 100,
+    marginRight: margins.sm,
+  },
+  unfollow: {
+    width: 30,
+    height: 30,
+    // width: '110%',
+    // height: '110%',
+    // borderRadius: 100,
+    marginRight: margins.md,
+  },
+});

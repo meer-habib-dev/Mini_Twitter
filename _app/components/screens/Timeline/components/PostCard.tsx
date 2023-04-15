@@ -37,10 +37,10 @@ const PostCard = ({item, handleFollow, followText = 'Follow'}: Props) => {
           />
           <View style={styles.textContainer}>
             <View style={styles.title}>
-              <TitleText text={item?.username} textStyle={styles.text} />
+              <TitleText text={item?.user?.username} textStyle={styles.text} />
               <Verified name="verified" size={20} color={Colors.primary} />
             </View>
-            <ShortText text={getEmailDomain(item?.email)} />
+            <ShortText text={getEmailDomain(item?.user?.email)} />
           </View>
           <View>
             <TouchableOpacity onPress={handleFollow}>
@@ -56,18 +56,14 @@ const PostCard = ({item, handleFollow, followText = 'Follow'}: Props) => {
 
             <ShortText
               textStyle={styles.shortText}
-              text={getTimeSince(new Date(item?.join_date))}
+              text={getTimeSince(new Date(item?.published))}
             />
           </View>
         </View>
         {/* dummy Text */}
 
         <View style={styles.header}>
-          <HeaderText
-            text={
-              'This is my twitter account do not spam in here. Otherwise i will knock Elon'
-            }
-          />
+          <HeaderText text={item?.content} />
         </View>
         {/* image */}
         <Card.Cover source={{uri: 'https://picsum.photos/700'}} />

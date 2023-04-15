@@ -11,6 +11,6 @@ export const api = axios.create({
   headers: {
     Authorization: `Bearer ${token}`,
     'Content-Type': 'application/json',
-    'X-Jwt-Token': `Bearer ${'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjEwOSIsImV4cCI6MTY4MTU3MDI0OH0.pWLRyLtx0Kgj8gshFb-DoVDGamCAsbruvZ5xp9kc7o8'}`,
+    'X-Jwt-Token': `Bearer ${'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjEwOSIsImV4cCI6MTY4MTU3NjE3Nn0.ex6QrGFVE7MfT99BuLiNWWISHNPNVXo3w83ke-6_AZU'}`,
   },
 });
