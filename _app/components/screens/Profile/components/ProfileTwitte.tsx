@@ -1,3 +1,4 @@
+/* eslint-disable react-native/no-inline-styles */
 import {StyleSheet, View} from 'react-native';
 import React from 'react';
 import Colors from '../../../../@lib/constants/theme/Colors';
@@ -21,11 +22,9 @@ const ProfileTwitte = () => {
     return (
       <TitleText
         textStyle={{
-          //   fontFamily: 'SinewsSansProDEMO-Medium',
           fontSize: Text_Size.Text_0,
           color: routes[index].key === route.key ? Colors.primary : Colors.text,
           fontWeight: routes[index].key === route.key ? 'bold' : 'normal',
-          //   fontWeight: '900',
         }}
         text={route.text}
       />
@@ -81,7 +80,6 @@ export default ProfileTwitte;
 const styles = StyleSheet.create({
   tabBarIndicatorStyles: {
     backgroundColor: Colors.primary,
-    // width: '100%',
     height: 4,
   },
 

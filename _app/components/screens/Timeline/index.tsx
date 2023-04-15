@@ -7,7 +7,6 @@ import Search from './components/Search';
 import {FAB} from 'react-native-paper';
 import Colors from '../../../@lib/constants/theme/Colors';
 import TBottomSheet from '../../common/modal/TBottomSheet';
-import TitleText from '../../common/text/TitleText';
 import {useTimelineApi} from '../../../@lib/api/services/useTimelineApi';
 import CardSkeleton from '../../common/loader/CardSkeleton';
 import ReusableFlatList from '../../common/ScrollComponent/ReusableFlatList';
@@ -18,6 +17,7 @@ import Text_Size from '../../../@lib/utils/functions/textScaling';
 import {View} from 'react-native';
 import NoSeachResult from '../../common/loader/NoSearch';
 import PostATweet from './components/PostATweet';
+import {useFollowUnfollowApi} from '../../../@lib/api/services/useFollowUnfollowApi';
 const Timeline = () => {
   const [post, setPost] = useState(false);
   const {
@@ -35,7 +35,7 @@ const Timeline = () => {
     searchText,
     handleSearchTextChange,
   } = useSearchUser();
-
+  const {handleFollowUnfollow} = useFollowUnfollowApi();
   function hanldePost() {
     setPost(prev => !prev);
   }
@@ -60,9 +60,15 @@ const Timeline = () => {
 
       {/* Card */}
       <ReusableFlatList
-        style={{flex: 1}}
+        // style={{flex: 1}}
         data={flatlistData}
-        renderItem={({item}) => <PostCard item={item} />}
+        renderItem={({item}) => (
+          <PostCard
+            item={item}
+            handleFollowUnfollow={() => handleFollowUnfollow({id: item.id})}
+            followText={true ? 'Follow' : 'Unfollow'}
+          />
+        )}
         keyExtractor={(item: {id: any}, index: any) =>
           (item?.id + index).toString()
         }

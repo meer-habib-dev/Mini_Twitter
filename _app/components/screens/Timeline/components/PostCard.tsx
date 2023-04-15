@@ -19,8 +19,14 @@ interface Props {
     active: boolean;
     join_date: string;
   };
+  handleFollowUnfollow: () => void;
+  followText: string;
 }
-const PostCard = ({item}: Props) => {
+const PostCard = ({
+  item,
+  handleFollowUnfollow,
+  followText = 'Follow',
+}: Props) => {
   return (
     <Card style={styles.card}>
       <Card.Content>
@@ -40,10 +46,22 @@ const PostCard = ({item}: Props) => {
             </View>
             <ShortText text={getEmailDomain(item?.email)} />
           </View>
-          <ShortText
-            textStyle={styles.shortText}
-            text={getTimeSince(new Date(item?.join_date))}
-          />
+          <View>
+            <TouchableOpacity onPress={handleFollowUnfollow}>
+              <HeaderText
+                textStyle={{
+                  fontWeight: 'bold',
+                  color: Colors.primary,
+                  textAlign: 'right',
+                }}
+                text={followText}
+              />
+            </TouchableOpacity>
+            <ShortText
+              textStyle={styles.shortText}
+              text={getTimeSince(new Date(item?.join_date))}
+            />
+          </View>
         </View>
         {/* dummy Text */}
 
@@ -100,6 +118,6 @@ const styles = StyleSheet.create({
   textContainer: {flex: 1},
   title: {flexDirection: 'row'},
   text: {fontWeight: 'bold', marginRight: margins.sm},
-  shortText: {marginRight: margins.md},
+  shortText: {},
   header: {marginVertical: margins.md},
 });

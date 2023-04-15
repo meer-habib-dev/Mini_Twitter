@@ -1,6 +1,6 @@
-import {StyleSheet, Text, View} from 'react-native';
+/* eslint-disable react-native/no-inline-styles */
+import {StyleSheet, View} from 'react-native';
 import React from 'react';
-import TitleText from '../../../common/text/TitleText';
 import Colors from '../../../../@lib/constants/theme/Colors';
 import {margins} from '../../../../@lib/constants';
 import HeaderText from '../../../common/text/HeaderText';
