@@ -6,11 +6,7 @@ import FIcon from 'react-native-vector-icons/FontAwesome';
 import Colors from '../../../../@lib/constants/theme/Colors';
 import Text_Size from '../../../../@lib/utils/functions/textScaling';
 import {margins} from '../../../../@lib/constants';
-import TInput from '../../../common/form/TInput';
-// import Yup from 'yup';
-import {useFormHandler} from '../../../../@lib/Hooks/useHookForm';
-import * as Yup from 'yup';
-import Loader from '../../../common/loader/Loader';
+
 import {ActivityIndicator} from 'react-native-paper';
 const Search = ({
   hanldePost,
@@ -18,8 +14,6 @@ const Search = ({
   handleSearchTextChange,
   searchLoading,
 }) => {
-
-
   return (
     <View style={styles.container}>
       <View style={styles.inputContainer}>
@@ -42,14 +36,16 @@ const Search = ({
           />
         ) : null}
       </View>
-      <TouchableOpacity onPress={hanldePost}>
-        <Icon
-          name="twitter"
-          size={30}
-          color={Colors.primary}
-          style={styles.twitter}
-        />
-      </TouchableOpacity>
+      {hanldePost && (
+        <TouchableOpacity onPress={hanldePost}>
+          <Icon
+            name="twitter"
+            size={30}
+            color={Colors.primary}
+            style={styles.twitter}
+          />
+        </TouchableOpacity>
+      )}
     </View>
   );
 };

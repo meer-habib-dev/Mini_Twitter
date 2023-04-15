@@ -1,5 +1,5 @@
 import {Image, StyleSheet, Text, View} from 'react-native';
-import React from 'react';
+import React, {useEffect} from 'react';
 import {margins} from '../../../../@lib/constants';
 import {Card} from 'react-native-paper';
 import Colors from '../../../../@lib/constants/theme/Colors';
@@ -8,12 +8,16 @@ import {useGetFollowersApi} from '../../../../@lib/api/services/useGetFollowersA
 import ReusableFlatList from '../../../common/ScrollComponent/ReusableFlatList';
 import NoSeachResult from '../../../common/loader/NoSearch';
 import CardTitleSkeleton from '../../../common/loader/CardTitleSkeleton';
+import {setStorageItem} from '../../../../@lib/utils/functions/storage';
 
 const Followrs = () => {
   const {data, isLoading, handleLoadMore} = useGetFollowersApi();
-  console.log('follwer', data);
   const flatListData = data?.pages?.flatMap(page => page?.data?.followers)!;
   const followerCount = flatListData?.length;
+  useEffect(() => {
+    typeof followerCount === 'number' &&
+      setStorageItem('follower', followerCount);
+  }, [followerCount]);
   function _renderItem({item}) {
     return (
       <Card

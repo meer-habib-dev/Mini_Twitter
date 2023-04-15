@@ -1,20 +1,20 @@
 import {MMKV} from 'react-native-mmkv';
 
 const STORAGE_KEY_PREFIX = '@miniTwitter';
-const storage = new Object();
-// const storage = new MMKV();
+// const storage = new Object();
+const storage = new MMKV();
 const setStorageItem = (key: any, value: any) => {
-  // const storageKey = `${STORAGE_KEY_PREFIX}:${key}`;
-  // storage.set(storageKey, value);
+  const storageKey = `${STORAGE_KEY_PREFIX}:${key}`;
+  storage.set(storageKey, value);
 };
 
 const getStorageItem = (key: any, type = 'str' || 'num' || 'bool') => {
   const storageKey = `${STORAGE_KEY_PREFIX}:${key}`;
-  // return type === 'str'
-  //   ? storage.getString(storageKey)
-  //   : type === 'num'
-  //   ? storage.getNumber(storageKey)
-  //   : storage.getBoolean(storageKey);
+  return type === 'str'
+    ? storage.getString(storageKey)
+    : type === 'num'
+    ? storage.getNumber(storageKey)
+    : storage.getBoolean(storageKey);
 };
 
 const updateStorageItem = (
@@ -22,20 +22,30 @@ const updateStorageItem = (
   value: any,
   type = 'str' || 'num' || 'bool',
 ) => {
-  // const storageKey = `${STORAGE_KEY_PREFIX}:${key}`;
-  // const currentValue =
-  //   type === 'str'
-  //     ? storage.getString(storageKey)
-  //     : type === 'num'
-  //     ? storage.getNumber(storageKey)
-  //     : storage.getBoolean(storageKey);
-  // const updatedValue = {...currentValue, ...value};
-  // storage.set(storageKey, updatedValue);
+  const storageKey = `${STORAGE_KEY_PREFIX}:${key}`;
+  const currentValue =
+    type === 'str'
+      ? storage.getString(storageKey)
+      : type === 'num'
+      ? storage.getNumber(storageKey)
+      : storage.getBoolean(storageKey);
+  const updatedValue = {...currentValue, ...value};
+  storage.set(storageKey, updatedValue);
 };
 
 const deleteStorageItem = (key: any) => {
-  // const storageKey = `${STORAGE_KEY_PREFIX}:${key}`;
-  // storage.delete(storageKey);
+  const storageKey = `${STORAGE_KEY_PREFIX}:${key}`;
+  storage.delete(storageKey);
 };
 
+setTimeout(() => {
+  const storedTimestamp: number = getStorageItem('auth-token-timestamp', 'num');
+  const elapsed = Date.now() - storedTimestamp;
+  const hour = 1000 * 60 * 60; // 1 hour in milliseconds
+
+  if (elapsed >= hour) {
+    deleteStorageItem('auth-token');
+    deleteStorageItem('auth-token-timestamp');
+  }
+}, 1000 * 60 * 60);
 export {setStorageItem, getStorageItem, updateStorageItem, deleteStorageItem};

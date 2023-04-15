@@ -36,16 +36,7 @@ const ProfileTwitte = ({}) => {
     }
   };
   const _renderTitle = ({route}) => {
-    // console.log('r', route);
     return (
-      // <TitleText
-      //   textStyle={{
-      //     fontSize: Text_Size.Text_0,
-      //     color: routes[index].key === route.key ? Colors.primary : Colors.text,
-      //     fontWeight: routes[index].key === route.key ? 'bold' : 'normal',
-      //   }}
-      //   text={route.text}
-      // />
       <Image style={{width: 30, height: 30}} source={_renderTitleIcon(route)} />
     );
   };

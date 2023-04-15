@@ -33,7 +33,7 @@ export const useGetFollowingApi = () => {
           text: 'Yes',
           onPress: async () => {
             const response: any = await unfollowMutate({user_id: id});
-            console.log('response', response);
+          
             if (response?.status === 200) {
               refetch();
             }

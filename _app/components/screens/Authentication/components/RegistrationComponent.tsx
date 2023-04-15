@@ -26,7 +26,7 @@ const RegistrationComponent = ({onSubmit, isLoading}) => {
             justifyContent: 'center',
             alignItems: 'center',
             height: '100%',
-            width: '100%',
+            width: '80%',
           }}>
           <TInput control={control} placeholder={'User Name'} name="username" />
           <TInput control={control} placeholder={'Email'} name="email" />

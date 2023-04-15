@@ -18,16 +18,26 @@ export type RootStackParamList = {
 const RootStack = createNativeStackNavigator<RootStackParamList>();
 const RootNavigator = () => {
   const token = getStorageItem('auth-token', 'str');
-
+  console.log('tokn', token);
   return (
     <RootStack.Navigator
-      initialRouteName={true ? 'Main' : 'Authentication'}
-      // initialRouteName={token ? 'Main' : 'Authentication'}
+      // initialRouteName={true ? 'Main' : 'Authentication'}
+      initialRouteName={token ? 'Main' : 'Authentication'}
       screenOptions={{
         gestureDirection: 'horizontal',
       }}>
       <RootStack.Group>
         <RootStack.Screen name="Main" component={TabNavigator} />
+        <RootStack.Screen
+          options={({navigation}) => ({
+            title: 'Timeline',
+            header: () => (
+              <HeaderWithBack navigation={navigation} title="Post Planet" />
+            ),
+          })}
+          name="Timeline"
+          component={Timeline}
+        />
 
         <RootStack.Screen
           options={({navigation}) => ({
@@ -38,16 +48,6 @@ const RootNavigator = () => {
           })}
           name="Profile"
           component={Profile}
-        />
-        <RootStack.Screen
-          options={({navigation}) => ({
-            title: 'Timeline',
-            header: () => (
-              <HeaderWithBack navigation={navigation} title="Post Planet" />
-            ),
-          })}
-          name="Timeline"
-          component={Timeline}
         />
 
         <RootStack.Screen

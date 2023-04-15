@@ -5,7 +5,8 @@ export const useFormHandler = (defaultValues, schema, onSubmit) => {
   const {
     control,
     handleSubmit,
-    formState: {errors, isSubmitting},
+    reset,
+    formState: {errors, isSubmitting, isSubmitted, isSubmitSuccessful},
   } = useForm({
     defaultValues,
     resolver: yupResolver(schema),
@@ -18,5 +19,8 @@ export const useFormHandler = (defaultValues, schema, onSubmit) => {
     onSubmitHandler,
     errors,
     isSubmitting,
+    isSubmitSuccessful,
+    isSubmitted,
+    reset,
   };
 };

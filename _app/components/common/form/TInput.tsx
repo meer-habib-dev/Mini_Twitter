@@ -46,7 +46,8 @@ const TInput = ({
               style={[
                 styles.singleField,
                 {
-                  width: fullWidth ? '100%' : '80%',
+                  flex: 1,
+
                   minHeight: multiline ? 200 : 40,
                   maxHeight: multiline ? 200 : 40,
                 },
@@ -63,7 +64,7 @@ const TInput = ({
               numberOfLines={numberOfLines}
               multiline={multiline}
             />
-            {password ? (
+            {password && (
               <Switch
                 trackColor={{
                   true: Colors.primary,
@@ -73,7 +74,7 @@ const TInput = ({
                 onValueChange={toggleSwitch}
                 value={!showPass}
               />
-            ) : null}
+            )}
           </View>
         );
       }}

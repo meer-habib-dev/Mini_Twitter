@@ -1,5 +1,5 @@
-import {StyleSheet, Text, View} from 'react-native';
-import React from 'react';
+import {StyleSheet, View} from 'react-native';
+import React, {useEffect} from 'react';
 import TInput from '../../../common/form/TInput';
 import * as Yup from 'yup';
 import {useFormHandler} from '../../../../@lib/Hooks/useHookForm';
@@ -11,16 +11,38 @@ import {ScrollView, TouchableOpacity} from 'react-native-gesture-handler';
 import FIcon from 'react-native-vector-icons/FontAwesome';
 import IIcon from 'react-native-vector-icons/Ionicons';
 import Loader from '../../../common/loader/Loader';
+// import {SuccessToast} from 'react-native-toast-message';
 const PostATweet = ({onClose, onSubmit, tweetLoading}) => {
-  const {control, onSubmitHandler, errors} = useFormHandler(
+  const {
+    control,
+    onSubmitHandler,
+    errors,
+    isSubmitSuccessful,
+
+    reset,
+  } = useFormHandler(
     {tweet: ''},
     Yup.object().shape({
       tweet: Yup.string().required(),
     }),
     onSubmit,
   );
+  useEffect(() => {
+    if (isSubmitSuccessful) {
+      reset();
+      onClose();
+    }
+  }, [isSubmitSuccessful]);
+
   return (
     <ScrollView style={{flexGrow: 1}}>
+      {/* {true && (
+        <SuccessToast
+          text1="Tweet posted"
+          text2={'You tweet have been posted '}
+          style={{borderLeftColor: Colors.primary, borderLeftWidth: 4}}
+        />
+      )} */}
       <HeaderText
         text="What's on your mind?"
         textStyle={{

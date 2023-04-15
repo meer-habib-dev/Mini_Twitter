@@ -14,7 +14,7 @@ import CardContentSkeleton from '../../../common/loader/CardContentSkeleton';
 
 const MyTwitte = () => {
   const {data, isLoading, handleLoadMore} = useMyTweetApi();
-  console.log('tweetdata', data);
+
   const flatListData = data?.pages?.flatMap(page => page?.data?.my_tweets)!;
   const tweetCount = flatListData?.length;
   function _renderItem({item}) {

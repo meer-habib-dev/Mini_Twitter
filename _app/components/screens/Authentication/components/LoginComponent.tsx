@@ -6,13 +6,8 @@ import {
   View,
 } from 'react-native';
 import React from 'react';
-import {
-  Switch,
-  TextInput,
-  TouchableOpacity,
-} from 'react-native-gesture-handler';
+
 import TButton from '../../../common/uiKits/TButton';
-import Colors from '../../../../@lib/constants/theme/Colors';
 import TInput from '../../../common/form/TInput';
 import {useFormHandler} from '../../../../@lib/Hooks/useHookForm';
 import {loginInit} from '../../../../@lib/utils/initalState/authInitialState';
@@ -38,7 +33,7 @@ const LoginComponent = ({onSubmit, isLoading}) => {
             justifyContent: 'center',
             alignItems: 'center',
             height: '100%',
-            width: '100%',
+            width: '80%',
           }}>
           <TInput control={control} placeholder={'Email'} name={'email'} />
           <TInput
@@ -47,18 +42,6 @@ const LoginComponent = ({onSubmit, isLoading}) => {
             password
             name={'password'}
           />
-          {/* <TextInput
-              autoCapitalize={'none'}
-              //   value={email}
-              blurOnSubmit={false}
-              //   onSubmitEditing={() => {
-              //     inputs['passwordField'].focus();
-              //   }}
-              //   onChangeText={text => setState({email: text, emailValidated: 1})}
-              placeholderTextColor={'#000000'}
-              placeholder={'E-mail'}
-              style={styles.singleField}
-            /> */}
         </View>
       </KeyboardAvoidingView>
       <TButton

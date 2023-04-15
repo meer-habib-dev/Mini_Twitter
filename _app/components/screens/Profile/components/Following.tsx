@@ -1,5 +1,5 @@
 import {Image, StyleSheet, View} from 'react-native';
-import React from 'react';
+import React, {useEffect} from 'react';
 import {Card} from 'react-native-paper';
 import {margins} from '../../../../@lib/constants';
 import Colors from '../../../../@lib/constants/theme/Colors';
@@ -10,14 +10,18 @@ import ReusableFlatList from '../../../common/ScrollComponent/ReusableFlatList';
 import {useGetFollowingApi} from '../../../../@lib/api/services/useGetFollowingApi';
 import {_IMAGE} from '../../../../@lib/assets/images';
 import CardTitleSkeleton from '../../../common/loader/CardTitleSkeleton';
+import {setStorageItem} from '../../../../@lib/utils/functions/storage';
 
 const Following = () => {
   const {data, isLoading, handleLoadMore, handleUnfollow} =
     useGetFollowingApi();
   const flatListData = data?.pages?.flatMap(page => page?.data?.followings)!;
-
   const followingCount = flatListData?.length;
-  console.log('following', flatListData);
+  useEffect(() => {
+    typeof followingCount === 'number' &&
+      setStorageItem('following', followingCount);
+  }, [followingCount]);
+
   function _renderItem({item}: any) {
     return (
       <Card
@@ -29,7 +33,7 @@ const Following = () => {
         }}>
         <Card.Title
           title={item?.username}
-          subtitle={item.email}
+          subtitle={item?.email}
           titleStyle={{
             fontWeight: '600',
           }}

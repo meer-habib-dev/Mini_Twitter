@@ -21,8 +21,16 @@ interface Props {
   };
   handleFollow: () => void;
   followText: string;
+  searchEnable: boolean;
 }
-const PostCard = ({item, handleFollow, followText = 'Follow'}: Props) => {
+const PostCard = ({
+  item,
+  handleFollow,
+  followText = 'Follow',
+  searchEnable,
+}: Props) => {
+  const username = searchEnable ? item?.username : item?.user?.username;
+  const email = searchEnable ? item?.email : item?.user?.email;
   return (
     <Card style={styles.card}>
       <Card.Content>
@@ -37,10 +45,10 @@ const PostCard = ({item, handleFollow, followText = 'Follow'}: Props) => {
           />
           <View style={styles.textContainer}>
             <View style={styles.title}>
-              <TitleText text={item?.user?.username} textStyle={styles.text} />
+              <TitleText text={username} textStyle={styles.text} />
               <Verified name="verified" size={20} color={Colors.primary} />
             </View>
-            <ShortText text={getEmailDomain(item?.user?.email)} />
+            <ShortText text={getEmailDomain(email)} />
           </View>
           <View>
             <TouchableOpacity onPress={handleFollow}>

@@ -4,11 +4,12 @@ import TitleText from '../../../common/text/TitleText';
 import ShortText from '../../../common/text/ShortText';
 import {margins} from '../../../../@lib/constants';
 import Text_Size from '../../../../@lib/utils/functions/textScaling';
-
-import {useNavigation} from '@react-navigation/native';
+import {getStorageItem} from '../../../../@lib/utils/functions/storage';
+import {splitEmail} from '../../../../@lib/utils/functions/splitEmail';
 
 const ProfileInfo = () => {
-  const navigation = useNavigation();
+  const email = getStorageItem('user-email', 'str');
+  const [name, domain] = splitEmail(email);
 
   return (
     <View
@@ -31,10 +32,10 @@ const ProfileInfo = () => {
           fontSize: Text_Size.Text_3,
           marginTop: margins.sm,
         }}
-        text={'Meer Habib'}
+        text={name}
       />
 
-      <ShortText text={'@meerhabib'} textStyle={{fontWeight: 'bold'}} />
+      <ShortText text={domain} textStyle={{fontWeight: 'bold'}} />
       <ShortText text="React Native Developer | React Doctor" />
     </View>
   );

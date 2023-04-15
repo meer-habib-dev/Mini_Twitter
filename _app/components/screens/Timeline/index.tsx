@@ -39,18 +39,19 @@ const Timeline = () => {
   function hanldePost() {
     setPost(prev => !prev);
   }
-  const flatlistData =
-    searchText?.length > 0
-      ? searchedUser?.data?.search_results
-      : data?.pages?.flatMap(page => page?.data?.timeline)! || [];
+  const searchEnable = searchText?.length > 0;
+  const flatlistData = searchEnable
+    ? searchedUser?.data?.search_results
+    : data?.pages?.flatMap(page => page?.data?.timeline)! || [];
   const seachError = searchedUser?.response?.data?.error
     ? searchedUser?.response?.data?.error
     : null;
   const searchCount = searchedUser?.data?.count;
-  console.log('serach', flatlistData);
+
   return (
     <SafeArea style={styles.container}>
       {/* Search */}
+
       <Search
         hanldePost={hanldePost}
         handleSearchTextChange={handleSearchTextChange}
@@ -66,8 +67,12 @@ const Timeline = () => {
           <PostCard
             item={item}
             handleFollow={() =>
-              handleFollow(item?.user?.id, item?.user?.username)
+              handleFollow(
+                searchEnable ? item?.id : item?.user?.id,
+                searchEnable ? item?.username : item?.user?.username,
+              )
             }
+            searchEnable={searchEnable}
             followText={'Follow'}
           />
         )}

@@ -4,8 +4,11 @@ import React from 'react';
 import Colors from '../../../../@lib/constants/theme/Colors';
 import {margins} from '../../../../@lib/constants';
 import HeaderText from '../../../common/text/HeaderText';
+import {getStorageItem} from '../../../../@lib/utils/functions/storage';
 
 const ProfileFollow = () => {
+  const follower = getStorageItem('follower', 'num');
+  const following = getStorageItem('following', 'num');
   return (
     <View
       style={{
@@ -24,7 +27,7 @@ const ProfileFollow = () => {
             color: Colors.secondary,
             marginRight: margins.xs,
           }}
-          text={'139'}
+          text={follower}
         />
         <HeaderText textStyle={{color: Colors.secondary}} text={'Following'} />
       </View>
@@ -35,7 +38,7 @@ const ProfileFollow = () => {
             color: Colors.secondary,
             marginRight: margins.xs,
           }}
-          text={'139'}
+          text={following}
         />
         <HeaderText textStyle={{color: Colors.secondary}} text={'Following'} />
       </View>

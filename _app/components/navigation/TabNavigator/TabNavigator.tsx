@@ -56,6 +56,7 @@ const TabNavigator = () => {
 
   return (
     <Tab.Navigator
+      initialRouteName="Timeline"
       tabBar={props => (
         <Animated.View
           entering={FadeInUp}

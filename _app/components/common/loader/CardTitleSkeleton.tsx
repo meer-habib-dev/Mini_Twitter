@@ -8,7 +8,6 @@ const CardTitleSkeleton = () => {
   return [1, 1, 1, 1, 1].map((_, i) => (
     <Card style={styles.card} key={i}>
       <SkeletonPlaceholder>
-        {/* // @ts-ignore */}
         <Card.Title>
           <View style={styles.title1}>
             <View style={styles.title2} />
@@ -21,19 +20,6 @@ const CardTitleSkeleton = () => {
           </View>
         </Card.Title>
       </SkeletonPlaceholder>
-      {/* <Card.Content>
-        <SkeletonPlaceholder>
-          <View style={styles.content1} />
-        </SkeletonPlaceholder>
-        <SkeletonPlaceholder>
-          <View style={styles.content2} />
-        </SkeletonPlaceholder>
-      </Card.Content>
-      <SkeletonPlaceholder>
-        <Card.Cover>
-          <View style={styles.cover} />
-        </Card.Cover>
-      </SkeletonPlaceholder> */}
     </Card>
   ));
 };

@@ -11,14 +11,28 @@ import {_IMAGE} from '../../../../@lib/assets/images';
 import CardTitleSkeleton from '../../../common/loader/CardTitleSkeleton';
 import {useUsersApi} from '../../../../@lib/api/services/useUserApi';
 import {useFollowApi} from '../../../../@lib/api/services/useFollowApi';
+import Search from '../../Timeline/components/Search';
+import {useSearchUser} from '../../../../@lib/api/services/useSearchUser';
 
 const Users = () => {
-  const {data, isLoading, handleLoadMore} = useUsersApi();
+  const {data, isLoading, handleLoadMore, isFetchingNextPage} = useUsersApi();
   const {handleFollow} = useFollowApi();
-  const flatListData = data?.pages?.flatMap(page => page?.data?.users)!;
+  const {
+    searchLoading,
+
+    searchedUser,
+    searchText,
+    handleSearchTextChange,
+  } = useSearchUser();
+  const flatListData =
+    searchText?.length > 0
+      ? searchedUser?.data?.search_results
+      : data?.pages?.flatMap(page => page?.data?.users)!;
 
   const userCount = flatListData?.length;
-  console.log('user', flatListData);
+  const seachError = searchedUser?.response?.data?.error
+    ? searchedUser?.response?.data?.error
+    : null;
   function _renderItem({item}: any) {
     return (
       <Card
@@ -30,7 +44,7 @@ const Users = () => {
         }}>
         <Card.Title
           title={item?.username}
-          subtitle={item.email}
+          subtitle={item?.email}
           titleStyle={{
             fontWeight: '600',
           }}
@@ -63,17 +77,25 @@ const Users = () => {
   }
   return (
     <View style={{marginTop: margins.sm}}>
+      <View style={{marginHorizontal: 3}}>
+        <Search
+          handleSearchTextChange={handleSearchTextChange}
+          searchText={searchText}
+          searchLoading={searchLoading}
+        />
+      </View>
       <ReusableFlatList
         data={flatListData || []}
         renderItem={_renderItem}
         keyExtractor={(item, index) => index.toString()}
         onEndReached={handleLoadMore}
+        ListFooterComponent={isFetchingNextPage ? <CardTitleSkeleton /> : null}
         ListEmptyComponent={
           userCount === 0 ? (
             <>
               <NoSeachResult />
             </>
-          ) : isLoading ? (
+          ) : !seachError && isLoading ? (
             <>
               <CardTitleSkeleton />
             </>

@@ -8,7 +8,11 @@ import {margins} from '../../../../@lib/constants';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import Icon from 'react-native-vector-icons/Entypo';
 import {deleteStorageItem} from '../../../../@lib/utils/functions/storage';
-import {useNavigation} from '@react-navigation/native';
+import {
+  StackActions,
+  useNavigation,
+  NavigationAction,
+} from '@react-navigation/native';
 const ProfileTop = () => {
   const navigation = useNavigation();
   async function hanldeLogout() {
@@ -21,6 +25,10 @@ const ProfileTop = () => {
         text: 'OK',
         onPress: async () => {
           deleteStorageItem('auth-token');
+          deleteStorageItem('user-email');
+          deleteStorageItem('auth-token-timestamp');
+          deleteStorageItem('following');
+          deleteStorageItem('follower');
           navigation.navigate('Authentication');
         },
       },
@@ -33,7 +41,7 @@ const ProfileTop = () => {
         <TitleText text={'Profile'} textStyle={styles.text} />
       </View>
       <TouchableOpacity onPress={hanldeLogout}>
-        <Icon name="log-out" size={25} />
+        <Icon name="log-out" size={25} color={Colors.red} />
       </TouchableOpacity>
     </View>
   );
@@ -56,5 +64,7 @@ const styles = StyleSheet.create({
   text: {
     fontSize: Text_Size.Text_4,
     marginLeft: margins.sm,
+    fontWeight: 'bold',
+    color: Colors.primary,
   },
 });
