@@ -1,40 +1,29 @@
-import {
-  KeyboardAvoidingView,
-  Platform,
-  StyleSheet,
-  Text,
-  View,
-} from 'react-native';
+import {KeyboardAvoidingView, StyleSheet, View} from 'react-native';
 import React from 'react';
-
 import TButton from '../../../common/uiKits/TButton';
 import TInput from '../../../common/form/TInput';
 import {useFormHandler} from '../../../../@lib/Hooks/useHookForm';
 import {loginInit} from '../../../../@lib/utils/initalState/authInitialState';
 import {LoginVS} from '../../../../@lib/utils/validationSchema/authValidationSchema';
-
-const LoginComponent = ({onSubmit, isLoading}) => {
+interface Props {
+  onSubmit: (
+    arg: string,
+    arg1: string,
+    arg3?: string,
+    mode?: string,
+  ) => void | any;
+  isLoading: boolean;
+}
+const LoginComponent = ({onSubmit, isLoading}: Props) => {
   const {control, onSubmitHandler} = useFormHandler(
     loginInit,
     LoginVS,
     onSubmit,
   );
   return (
-    <View style={{flex: 1}}>
-      <KeyboardAvoidingView
-        style={{
-          flex: 0.8,
-          //   backgroundColor: 'red',
-          justifyContent: 'center',
-          alignItems: 'center',
-        }}>
-        <View
-          style={{
-            justifyContent: 'center',
-            alignItems: 'center',
-            height: '100%',
-            width: '80%',
-          }}>
+    <View style={styles.container}>
+      <KeyboardAvoidingView style={styles.kyb}>
+        <View style={styles.inputWrapper}>
           <TInput control={control} placeholder={'Email'} name={'email'} />
           <TInput
             control={control}
@@ -45,7 +34,7 @@ const LoginComponent = ({onSubmit, isLoading}) => {
         </View>
       </KeyboardAvoidingView>
       <TButton
-        // disabled={typeof countries_id === 'string'}
+        disabled={isLoading}
         onPress={onSubmitHandler}
         isLoading={isLoading}
         text="Log in"
@@ -56,4 +45,17 @@ const LoginComponent = ({onSubmit, isLoading}) => {
 
 export default LoginComponent;
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  container: {flex: 1},
+  kyb: {
+    flex: 0.8,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  inputWrapper: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    height: '100%',
+    width: '80%',
+  },
+});

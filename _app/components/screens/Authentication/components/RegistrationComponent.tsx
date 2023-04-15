@@ -5,29 +5,26 @@ import TButton from '../../../common/uiKits/TButton';
 import {useFormHandler} from '../../../../@lib/Hooks/useHookForm';
 import {registractionInit} from '../../../../@lib/utils/initalState/authInitialState';
 import {RegistrationVS} from '../../../../@lib/utils/validationSchema/authValidationSchema';
-// import {TouchableOpacity} from 'react-native-gesture-handler';
 
-const RegistrationComponent = ({onSubmit, isLoading}) => {
-  const {control, onSubmitHandler, errors} = useFormHandler(
+interface Props {
+  onSubmit: (
+    arg: string,
+    arg1: string,
+    arg3?: string,
+    mode?: string,
+  ) => void | any;
+  isLoading: boolean;
+}
+const RegistrationComponent = ({onSubmit, isLoading}: Props) => {
+  const {control, onSubmitHandler} = useFormHandler(
     registractionInit,
     RegistrationVS,
     onSubmit,
   );
   return (
-    <View style={{flex: 1}}>
-      <KeyboardAvoidingView
-        style={{
-          flex: 0.8,
-          justifyContent: 'center',
-          alignItems: 'center',
-        }}>
-        <View
-          style={{
-            justifyContent: 'center',
-            alignItems: 'center',
-            height: '100%',
-            width: '80%',
-          }}>
+    <View style={styles.container}>
+      <KeyboardAvoidingView style={styles.kyb}>
+        <View style={styles.inputwrapper}>
           <TInput control={control} placeholder={'User Name'} name="username" />
           <TInput control={control} placeholder={'Email'} name="email" />
           <TInput
@@ -36,18 +33,6 @@ const RegistrationComponent = ({onSubmit, isLoading}) => {
             password
             name="password"
           />
-          {/* <TextInput
-              autoCapitalize={'none'}
-              //   value={email}
-              blurOnSubmit={false}
-              //   onSubmitEditing={() => {
-              //     inputs['passwordField'].focus();
-              //   }}
-              //   onChangeText={text => setState({email: text, emailValidated: 1})}
-              placeholderTextColor={'#000000'}
-              placeholder={'E-mail'}
-              style={styles.singleField}
-            /> */}
         </View>
       </KeyboardAvoidingView>
 
@@ -62,4 +47,17 @@ const RegistrationComponent = ({onSubmit, isLoading}) => {
 
 export default RegistrationComponent;
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  container: {flex: 1},
+  kyb: {
+    flex: 0.8,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  inputwrapper: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    height: '100%',
+    width: '80%',
+  },
+});

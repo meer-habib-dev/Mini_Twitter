@@ -1,19 +1,14 @@
 import React from 'react';
-import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
+import {View, StyleSheet, TouchableOpacity} from 'react-native';
 import Colors from '../../../@lib/constants/theme/Colors';
 import Loader from '../loader/Loader';
+import TitleText from '../text/TitleText';
 
 interface Props {
-  // containerStyle: any;
-  // progressStyle?: ViewStyle | undefined;
-  // onSelect: ((event: GestureResponderEvent) => void) | undefined;
-  // textAlignment: ViewStyle | undefined;
-  // isLeftIcon?: any;
-  // titleStyle: TextStyle | undefined;
-  // title: any;
-  // icon?: any;
-  // loading?: boolean;
-  // color?: string;
+  text: string;
+  disabled?: boolean;
+  isLoading?: boolean;
+  onPress: () => void;
 }
 const TButton = ({disabled, onPress, text, isLoading}: Props) => {
   return (
@@ -28,9 +23,7 @@ const TButton = ({disabled, onPress, text, isLoading}: Props) => {
         {isLoading ? (
           <Loader />
         ) : (
-          <Text style={styles.continueButtonText}>
-            {text ? text : 'Nastavi'}
-          </Text>
+          <TitleText textStyle={styles.continueButtonText} text={text} />
         )}
       </TouchableOpacity>
     </View>

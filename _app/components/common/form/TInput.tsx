@@ -1,9 +1,17 @@
-import {Platform, StyleSheet, View} from 'react-native';
+import {Platform, StyleProp, StyleSheet, View, ViewStyle} from 'react-native';
 import React, {useState} from 'react';
 import {Controller} from 'react-hook-form';
 import {Switch, TextInput} from 'react-native-gesture-handler';
 import Colors from '../../../@lib/constants/theme/Colors';
-
+interface Props {
+  control: any;
+  placeholder: string;
+  password?: boolean;
+  name: string;
+  style?: StyleProp<ViewStyle>;
+  numberOfLines?: number;
+  multiline?: boolean;
+}
 const TInput = ({
   control,
   placeholder,
@@ -12,8 +20,7 @@ const TInput = ({
   style,
   numberOfLines,
   multiline,
-  fullWidth,
-}) => {
+}: Props) => {
   const [showPass, setShowPass] = useState(password);
   function toggleSwitch() {
     setShowPass(!showPass);
@@ -47,7 +54,6 @@ const TInput = ({
                 styles.singleField,
                 {
                   flex: 1,
-
                   minHeight: multiline ? 200 : 40,
                   maxHeight: multiline ? 200 : 40,
                 },
@@ -87,7 +93,6 @@ export default TInput;
 const styles = StyleSheet.create({
   singleField: {
     color: '#000000',
-
     fontSize: 17,
   },
 });
