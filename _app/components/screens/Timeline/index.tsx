@@ -33,6 +33,7 @@ const Timeline = () => {
     flatlistData,
     seachError,
     setPost,
+    timelineCount,
   } = useTimeline();
   return (
     <SafeArea style={styles.container}>
@@ -75,7 +76,7 @@ const Timeline = () => {
         onEndReached={handleLoadMore}
         ListFooterComponent={isFetchingNextPage ? <CardSkeleton /> : null}
         ListEmptyComponent={
-          searchCount === 0 ? (
+          searchCount === 0 || timelineCount === 0 ? (
             <View style={styles.searchCount}>
               <NoSeachResult />
             </View>

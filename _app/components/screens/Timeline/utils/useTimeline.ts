@@ -5,6 +5,7 @@ import {useTimelineApi} from '../../../../@lib/api/services/useTimelineApi';
 
 export const useTimeline = () => {
   const [post, setPost] = useState(false);
+
   const {
     isLoading,
     data,
@@ -32,6 +33,7 @@ export const useTimeline = () => {
     ? searchedUser?.response?.data?.error
     : null;
   const searchCount = searchedUser?.data?.count;
+  const timelineCount = flatlistData?.length;
   return {
     post,
     isLoading,
@@ -50,5 +52,6 @@ export const useTimeline = () => {
     searchText,
     seachError,
     setPost,
+    timelineCount,
   };
 };

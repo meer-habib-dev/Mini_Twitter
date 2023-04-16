@@ -37,7 +37,6 @@ const LoginComponent = ({onSubmit, isLoading}: Props) => {
           />
         </View>
         <TButton
-          disabled={isLoading}
           onPress={onSubmitHandler}
           isLoading={isLoading}
           text="Log in"

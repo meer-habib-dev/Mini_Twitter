@@ -35,11 +35,11 @@ function useAuthApi() {
         const timestamp = Date.now();
         setStorageItem('auth-token', result?.data?.token);
         setStorageItem('auth-token-timestamp', timestamp);
-
         setStorageItem('user-email', email);
 
         navigation.dispatch(
           StackActions.replace('Main', {
+            token: result?.data?.token,
             screen: 'Timeline',
           }),
         );
