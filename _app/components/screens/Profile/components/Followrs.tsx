@@ -1,4 +1,5 @@
-import {Image, StyleSheet, Text, View} from 'react-native';
+/* eslint-disable react/no-unstable-nested-components */
+import {Image, StyleSheet, View} from 'react-native';
 import React, {useEffect} from 'react';
 import {margins} from '../../../../@lib/constants';
 import {Card} from 'react-native-paper';
@@ -20,22 +21,12 @@ const Followrs = () => {
   }, [followerCount]);
   function _renderItem({item}) {
     return (
-      <Card
-        style={{
-          margin: margins.xs,
-          backgroundColor: Colors.secondary,
-          marginVertical: margins.sm,
-        }}>
+      <Card style={styles.card}>
         <Card.Title
           title={item?.username}
           subtitle={item?.email}
-          titleStyle={{
-            fontWeight: '600',
-          }}
-          subtitleStyle={{
-            fontSize: Text_Size.Text_8,
-            color: Colors.gray,
-          }}
+          titleStyle={styles.title}
+          subtitleStyle={styles.subtitle}
           left={props => (
             <Image
               {...props}
@@ -76,4 +67,23 @@ const Followrs = () => {
 
 export default Followrs;
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  card: {
+    margin: margins.xs,
+    backgroundColor: Colors.secondary,
+    marginVertical: margins.sm,
+  },
+  title: {
+    fontWeight: '600',
+  },
+  subtitle: {
+    fontSize: Text_Size.Text_8,
+    color: Colors.gray,
+  },
+  image: {
+    width: 46,
+    height: 46,
+    borderRadius: 100,
+    marginRight: margins.sm,
+  },
+});

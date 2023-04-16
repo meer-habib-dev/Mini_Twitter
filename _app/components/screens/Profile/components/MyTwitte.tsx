@@ -17,26 +17,17 @@ const MyTwitte = () => {
 
   const flatListData = data?.pages?.flatMap(page => page?.data?.my_tweets)!;
   const tweetCount = flatListData?.length;
-  function _renderItem({item}) {
+  function _renderItem({item}: any) {
     return (
-      <Card
-        style={{
-          margin: margins.xs,
-          backgroundColor: Colors.secondary,
-          marginVertical: margins.sm,
-        }}>
+      <Card style={styles.card}>
         <Card.Content>
-          <TitleText
-            textStyle={{marginBottom: margins.md, fontSize: Text_Size.Text_2}}
-            text={item?.content}
-          />
+          <TitleText textStyle={styles.title} text={item?.content} />
         </Card.Content>
 
-        <Card.Content
-          style={{flexDirection: 'row', justifyContent: 'flex-end'}}>
+        <Card.Content style={styles.cardContent}>
           <ShortText
             text={getTimeSince(new Date(item?.published))}
-            textStyle={{marginRight: margins.xs}}
+            textStyle={styles.short}
           />
           <TitleText text={'@' + item?.user?.username} />
         </Card.Content>
@@ -68,4 +59,13 @@ const MyTwitte = () => {
 
 export default MyTwitte;
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  card: {
+    margin: margins.xs,
+    backgroundColor: Colors.secondary,
+    marginVertical: margins.sm,
+  },
+  cardContent: {flexDirection: 'row', justifyContent: 'flex-end'},
+  title: {marginBottom: margins.md, fontSize: Text_Size.Text_2},
+  short: {marginRight: margins.xs},
+});

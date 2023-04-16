@@ -1,14 +1,11 @@
-/* eslint-disable react-native/no-inline-styles */
 import {Image, StyleSheet, View} from 'react-native';
 import React from 'react';
 import Colors from '../../../../@lib/constants/theme/Colors';
 import {margins} from '../../../../@lib/constants';
 import {TabBar, TabView} from 'react-native-tab-view';
-import TitleText from '../../../common/text/TitleText';
 import MyTwitte from './MyTwitte';
 import Followrs from './Followrs';
 import Following from './Following';
-import Text_Size from '../../../../@lib/utils/functions/textScaling';
 import Users from './Users';
 import {_IMAGE} from '../../../../@lib/assets/images';
 
@@ -20,7 +17,7 @@ const ProfileTwitte = ({}) => {
     {key: 'following', text: 'Following'},
     {key: 'users', text: 'Users'},
   ]);
-  const _renderTitleIcon = ({key}) => {
+  const _renderTitleIcon = ({key}: any) => {
     switch (key) {
       case 'mytwitte':
         return _IMAGE.mytweet;
@@ -35,12 +32,10 @@ const ProfileTwitte = ({}) => {
         return null;
     }
   };
-  const _renderTitle = ({route}) => {
-    return (
-      <Image style={{width: 30, height: 30}} source={_renderTitleIcon(route)} />
-    );
+  const _renderTitle = ({route}: any) => {
+    return <Image style={styles.imageTab} source={_renderTitleIcon(route)} />;
   };
-  const _renderHeader = props => {
+  const _renderHeader = (props: any) => {
     return (
       <TabBar
         inactiveColor={'#CECECE'}
@@ -52,7 +47,7 @@ const ProfileTwitte = ({}) => {
       />
     );
   };
-  const _renderScene = ({route}) => {
+  const _renderScene = ({route}: any) => {
     switch (route.key) {
       case 'mytwitte':
         return <MyTwitte />;
@@ -62,21 +57,12 @@ const ProfileTwitte = ({}) => {
         return <Following />;
       case 'users':
         return <Users />;
-
       default:
         return null;
     }
   };
   return (
-    <View
-      style={{
-        flex: 1,
-        backgroundColor: Colors.background,
-        borderTopRightRadius: margins.lg,
-        borderTopLeftRadius: margins.lg,
-        marginTop: -margins.lg,
-        paddingHorizontal: margins.lg,
-      }}>
+    <View style={styles.tabWrapper}>
       <TabView
         navigationState={{index, routes}}
         renderScene={_renderScene}
@@ -90,13 +76,21 @@ const ProfileTwitte = ({}) => {
 export default ProfileTwitte;
 
 const styles = StyleSheet.create({
+  tabWrapper: {
+    flex: 1,
+    backgroundColor: Colors.background,
+    borderTopRightRadius: margins.lg,
+    borderTopLeftRadius: margins.lg,
+    marginTop: -margins.lg,
+    paddingHorizontal: margins.lg,
+  },
   tabBarIndicatorStyles: {
     backgroundColor: Colors.primary,
     height: 4,
   },
+  imageTab: {width: 30, height: 30},
 
   tabStyles: {
-    // justifyContent: 'center',
     marginTop: margins.md,
     alignItems: 'center',
     backgroundColor: 'transparent',
@@ -104,8 +98,6 @@ const styles = StyleSheet.create({
 
   tabBarMainStyles: {
     backgroundColor: 'transparent',
-    // height: 10,
-
     justifyContent: 'center',
   },
 });

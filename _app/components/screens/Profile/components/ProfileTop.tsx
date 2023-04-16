@@ -8,13 +8,9 @@ import {margins} from '../../../../@lib/constants';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import Icon from 'react-native-vector-icons/Entypo';
 import {deleteStorageItem} from '../../../../@lib/utils/functions/storage';
-import {
-  StackActions,
-  useNavigation,
-  NavigationAction,
-} from '@react-navigation/native';
+import {useNavigation} from '@react-navigation/native';
 const ProfileTop = () => {
-  const navigation = useNavigation();
+  const navigation = useNavigation<any>();
   async function hanldeLogout() {
     Alert.alert('Log Out', 'Are you sure you want to logout', [
       {

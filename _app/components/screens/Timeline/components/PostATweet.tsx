@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import {StyleSheet, View} from 'react-native';
 import React, {useEffect} from 'react';
 import TInput from '../../../common/form/TInput';
@@ -12,7 +13,12 @@ import FIcon from 'react-native-vector-icons/FontAwesome';
 import IIcon from 'react-native-vector-icons/Ionicons';
 import Loader from '../../../common/loader/Loader';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
-const PostATweet = ({onClose, onSubmit, tweetLoading}) => {
+interface Props {
+  onClose: () => void;
+  onSubmit: (arg: any) => void;
+  tweetLoading: boolean;
+}
+const PostATweet = ({onClose, onSubmit, tweetLoading}: Props) => {
   const {
     control,
     onSubmitHandler,
@@ -35,22 +41,14 @@ const PostATweet = ({onClose, onSubmit, tweetLoading}) => {
   }, [isSubmitSuccessful]);
 
   return (
-    <ScrollView style={{flexGrow: 1}}>
+    <ScrollView style={styles.scrollView}>
       <KeyboardAwareScrollView enableAutomaticScroll enableOnAndroid>
-        <HeaderText
-          text="What's on your mind?"
-          textStyle={{
-            marginBottom: margins.md,
-            fontSize: Text_Size.Text_4,
-            color: Colors.subText,
-          }}
-        />
+        <HeaderText text="What's on your mind?" textStyle={styles.headerText} />
         <TInput
           style={[
             styles.singleField,
             {
               borderColor: errors['tweet'] ? Colors.alert : Colors.primary,
-              borderWidth: 2,
             },
           ]}
           control={control}
@@ -58,7 +56,6 @@ const PostATweet = ({onClose, onSubmit, tweetLoading}) => {
           placeholder={'Write your tweet...'}
           multiline={true}
           numberOfLines={40}
-          fullWidth
         />
         <View style={styles.btnWrapper}>
           <TouchableOpacity
@@ -85,10 +82,17 @@ const PostATweet = ({onClose, onSubmit, tweetLoading}) => {
 export default PostATweet;
 
 const styles = StyleSheet.create({
+  scrollView: {flexGrow: 1},
+  headerText: {
+    marginBottom: margins.md,
+    fontSize: Text_Size.Text_4,
+    color: Colors.subText,
+  },
   singleField: {
     backgroundColor: Colors.secondary,
     padding: margins.md,
     borderRadius: margins.sm,
+    borderWidth: 2,
 
     // flexGrow: 0.5,
   },

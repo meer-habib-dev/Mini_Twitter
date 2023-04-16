@@ -12,13 +12,15 @@ import {TouchableOpacity} from 'react-native-gesture-handler';
 import {getTimeSince} from '../../../../@lib/utils/functions/getTimeSince';
 import {getEmailDomain} from '../../../../@lib/utils/functions/getEmailDomain';
 interface Props {
-  item: {
-    id: number;
-    email: string;
-    username: string;
-    active: boolean;
-    join_date: string;
-  };
+  item:
+    | {
+        id: number;
+        email: string;
+        username: string;
+        active: boolean;
+        join_date: string;
+      }
+    | any;
   handleFollow: () => void;
   followText: string;
   searchEnable: boolean;
@@ -52,14 +54,7 @@ const PostCard = ({
           </View>
           <View>
             <TouchableOpacity onPress={handleFollow}>
-              <HeaderText
-                textStyle={{
-                  fontWeight: 'bold',
-                  color: Colors.primary,
-                  textAlign: 'right',
-                }}
-                text={followText}
-              />
+              <HeaderText textStyle={styles.followtext} text={followText} />
             </TouchableOpacity>
 
             <ShortText
@@ -121,4 +116,9 @@ const styles = StyleSheet.create({
   text: {fontWeight: 'bold', marginRight: margins.sm},
   shortText: {},
   header: {marginVertical: margins.md},
+  followtext: {
+    fontWeight: 'bold',
+    color: Colors.primary,
+    textAlign: 'right',
+  },
 });

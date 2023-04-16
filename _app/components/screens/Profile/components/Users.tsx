@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unstable-nested-components */
 import {Image, StyleSheet, View} from 'react-native';
 import React from 'react';
 import {Card} from 'react-native-paper';
@@ -9,49 +10,30 @@ import NoSeachResult from '../../../common/loader/NoSearch';
 import ReusableFlatList from '../../../common/ScrollComponent/ReusableFlatList';
 import {_IMAGE} from '../../../../@lib/assets/images';
 import CardTitleSkeleton from '../../../common/loader/CardTitleSkeleton';
-import {useUsersApi} from '../../../../@lib/api/services/useUserApi';
-import {useFollowApi} from '../../../../@lib/api/services/useFollowApi';
 import Search from '../../Timeline/components/Search';
-import {useSearchUser} from '../../../../@lib/api/services/useSearchUser';
+import {useUsers} from '../utils/useUsers';
 
 const Users = () => {
-  const {data, isLoading, handleLoadMore, isFetchingNextPage} = useUsersApi();
-  const {handleFollow} = useFollowApi();
   const {
-    searchLoading,
-
-    searchedUser,
-    searchText,
+    isLoading,
+    handleLoadMore,
+    handleFollow,
     handleSearchTextChange,
-  } = useSearchUser();
-  const flatListData =
-    searchText?.length > 0
-      ? searchedUser?.data?.search_results
-      : data?.pages?.flatMap(page => page?.data?.users)!;
-
-  const userCount = flatListData?.length;
-  const seachError = searchedUser?.response?.data?.error
-    ? searchedUser?.response?.data?.error
-    : null;
+    userCount,
+    searchLoading,
+    seachError,
+    flatListData,
+    searchText,
+    isFetchingNextPage,
+  } = useUsers();
   function _renderItem({item}: any) {
     return (
-      <Card
-        style={{
-          margin: margins.xs,
-          backgroundColor: Colors.secondary,
-          marginVertical: margins.sm,
-          paddingVertical: margins.sm,
-        }}>
+      <Card style={styles.card}>
         <Card.Title
           title={item?.username}
           subtitle={item?.email}
-          titleStyle={{
-            fontWeight: '600',
-          }}
-          subtitleStyle={{
-            fontSize: Text_Size.Text_8,
-            color: Colors.gray,
-          }}
+          titleStyle={styles.titleStyle}
+          subtitleStyle={styles.subtitle}
           left={props => (
             <Image
               {...props}
@@ -76,8 +58,8 @@ const Users = () => {
     );
   }
   return (
-    <View style={{marginTop: margins.sm}}>
-      <View style={{marginHorizontal: 3}}>
+    <View style={styles.container}>
+      <View style={styles.searchWrapper}>
         <Search
           handleSearchTextChange={handleSearchTextChange}
           searchText={searchText}
@@ -111,20 +93,30 @@ const Users = () => {
 export default Users;
 
 const styles = StyleSheet.create({
+  container: {marginTop: margins.sm},
+  card: {
+    margin: margins.xs,
+    backgroundColor: Colors.secondary,
+    marginVertical: margins.sm,
+    paddingVertical: margins.sm,
+  },
   image: {
     width: 46,
     height: 46,
-    // width: '110%',
-    // height: '110%',
     borderRadius: 100,
     marginRight: margins.sm,
   },
   unfollow: {
     width: 30,
     height: 30,
-    // width: '110%',
-    // height: '110%',
-    // borderRadius: 100,
     marginRight: margins.md,
   },
+  titleStyle: {
+    fontWeight: '600',
+  },
+  subtitle: {
+    fontSize: Text_Size.Text_8,
+    color: Colors.gray,
+  },
+  searchWrapper: {marginHorizontal: 3},
 });

@@ -8,12 +8,18 @@ import Text_Size from '../../../../@lib/utils/functions/textScaling';
 import {margins} from '../../../../@lib/constants';
 
 import {ActivityIndicator} from 'react-native-paper';
+interface Props {
+  handlePost?: () => void;
+  handleSearchTextChange: (text: string) => void;
+  searchText: string;
+  searchLoading: boolean;
+}
 const Search = ({
-  hanldePost,
+  handlePost,
   searchText,
   handleSearchTextChange,
   searchLoading,
-}) => {
+}: Props) => {
   return (
     <View style={styles.container}>
       <View style={styles.inputContainer}>
@@ -36,8 +42,8 @@ const Search = ({
           />
         ) : null}
       </View>
-      {hanldePost && (
-        <TouchableOpacity onPress={hanldePost}>
+      {handlePost && (
+        <TouchableOpacity onPress={handlePost}>
           <Icon
             name="twitter"
             size={30}
@@ -64,7 +70,6 @@ const styles = StyleSheet.create({
     flex: 1,
     borderWidth: 0.5,
     flexDirection: 'row',
-    // marginHorizontal: 10,
     alignItems: 'center',
     justifyContent: 'space-between',
     borderRadius: 50,

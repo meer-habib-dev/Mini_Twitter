@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unstable-nested-components */
 import {Image, StyleSheet, View} from 'react-native';
 import React, {useEffect} from 'react';
 import {Card} from 'react-native-paper';
@@ -24,23 +25,12 @@ const Following = () => {
 
   function _renderItem({item}: any) {
     return (
-      <Card
-        style={{
-          margin: margins.xs,
-          backgroundColor: Colors.secondary,
-          marginVertical: margins.sm,
-          paddingVertical: margins.sm,
-        }}>
+      <Card style={styles.card}>
         <Card.Title
           title={item?.username}
           subtitle={item?.email}
-          titleStyle={{
-            fontWeight: '600',
-          }}
-          subtitleStyle={{
-            fontSize: Text_Size.Text_8,
-            color: Colors.gray,
-          }}
+          titleStyle={styles.title}
+          subtitleStyle={styles.subtitle}
           left={props => (
             <Image
               {...props}
@@ -65,7 +55,7 @@ const Following = () => {
     );
   }
   return (
-    <View style={{marginTop: margins.sm}}>
+    <View style={styles.container}>
       <ReusableFlatList
         data={flatListData || []}
         renderItem={_renderItem}
@@ -92,20 +82,29 @@ const Following = () => {
 export default Following;
 
 const styles = StyleSheet.create({
+  container: {marginTop: margins.sm},
+  card: {
+    margin: margins.xs,
+    backgroundColor: Colors.secondary,
+    marginVertical: margins.sm,
+    paddingVertical: margins.sm,
+  },
   image: {
     width: 46,
     height: 46,
-    // width: '110%',
-    // height: '110%',
     borderRadius: 100,
     marginRight: margins.sm,
   },
   unfollow: {
     width: 30,
     height: 30,
-    // width: '110%',
-    // height: '110%',
-    // borderRadius: 100,
     marginRight: margins.md,
+  },
+  title: {
+    fontWeight: '600',
+  },
+  subtitle: {
+    fontSize: Text_Size.Text_8,
+    color: Colors.gray,
   },
 });
