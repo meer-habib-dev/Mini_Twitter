@@ -11,7 +11,7 @@ import {ScrollView, TouchableOpacity} from 'react-native-gesture-handler';
 import FIcon from 'react-native-vector-icons/FontAwesome';
 import IIcon from 'react-native-vector-icons/Ionicons';
 import Loader from '../../../common/loader/Loader';
-// import {SuccessToast} from 'react-native-toast-message';
+import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 const PostATweet = ({onClose, onSubmit, tweetLoading}) => {
   const {
     control,
@@ -36,53 +36,48 @@ const PostATweet = ({onClose, onSubmit, tweetLoading}) => {
 
   return (
     <ScrollView style={{flexGrow: 1}}>
-      {/* {true && (
-        <SuccessToast
-          text1="Tweet posted"
-          text2={'You tweet have been posted '}
-          style={{borderLeftColor: Colors.primary, borderLeftWidth: 4}}
+      <KeyboardAwareScrollView enableAutomaticScroll enableOnAndroid>
+        <HeaderText
+          text="What's on your mind?"
+          textStyle={{
+            marginBottom: margins.md,
+            fontSize: Text_Size.Text_4,
+            color: Colors.subText,
+          }}
         />
-      )} */}
-      <HeaderText
-        text="What's on your mind?"
-        textStyle={{
-          marginBottom: margins.md,
-          fontSize: Text_Size.Text_4,
-          color: Colors.subText,
-        }}
-      />
-      <TInput
-        style={[
-          styles.singleField,
-          {
-            borderColor: errors['tweet'] ? Colors.alert : Colors.primary,
-            borderWidth: 2,
-          },
-        ]}
-        control={control}
-        name={'tweet'}
-        placeholder={'Write your tweet...'}
-        multiline={true}
-        numberOfLines={40}
-        fullWidth
-      />
-      <View style={styles.btnWrapper}>
-        <TouchableOpacity
-          style={[styles.iconWrapper, {backgroundColor: Colors.secondary}]}
-          onPress={onClose}>
-          <FIcon name="close" size={40} color={Colors.primary} />
-        </TouchableOpacity>
-        <TouchableOpacity
-          disabled={tweetLoading}
-          style={styles.iconWrapper}
-          onPress={onSubmitHandler}>
-          {tweetLoading ? (
-            <Loader />
-          ) : (
-            <IIcon name="send" size={30} color={Colors.secondary} />
-          )}
-        </TouchableOpacity>
-      </View>
+        <TInput
+          style={[
+            styles.singleField,
+            {
+              borderColor: errors['tweet'] ? Colors.alert : Colors.primary,
+              borderWidth: 2,
+            },
+          ]}
+          control={control}
+          name={'tweet'}
+          placeholder={'Write your tweet...'}
+          multiline={true}
+          numberOfLines={40}
+          fullWidth
+        />
+        <View style={styles.btnWrapper}>
+          <TouchableOpacity
+            style={[styles.iconWrapper, {backgroundColor: Colors.secondary}]}
+            onPress={onClose}>
+            <FIcon name="close" size={40} color={Colors.primary} />
+          </TouchableOpacity>
+          <TouchableOpacity
+            disabled={tweetLoading}
+            style={styles.iconWrapper}
+            onPress={onSubmitHandler}>
+            {tweetLoading ? (
+              <Loader />
+            ) : (
+              <IIcon name="send" size={30} color={Colors.secondary} />
+            )}
+          </TouchableOpacity>
+        </View>
+      </KeyboardAwareScrollView>
     </ScrollView>
   );
 };

@@ -1,10 +1,11 @@
-import {KeyboardAvoidingView, StyleSheet, View} from 'react-native';
+import {StyleSheet, View} from 'react-native';
 import React from 'react';
 import TInput from '../../../common/form/TInput';
 import TButton from '../../../common/uiKits/TButton';
 import {useFormHandler} from '../../../../@lib/Hooks/useHookForm';
 import {registractionInit} from '../../../../@lib/utils/initalState/authInitialState';
 import {RegistrationVS} from '../../../../@lib/utils/validationSchema/authValidationSchema';
+import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 
 interface Props {
   onSubmit: (
@@ -22,8 +23,11 @@ const RegistrationComponent = ({onSubmit, isLoading}: Props) => {
     onSubmit,
   );
   return (
-    <View style={styles.container}>
-      <KeyboardAvoidingView style={styles.kyb}>
+    <KeyboardAwareScrollView
+      enableAutomaticScroll
+      enableOnAndroid
+      contentContainerStyle={styles.kyb}>
+      <View style={styles.container}>
         <View style={styles.inputwrapper}>
           <TInput control={control} placeholder={'User Name'} name="username" />
           <TInput control={control} placeholder={'Email'} name="email" />
@@ -34,14 +38,14 @@ const RegistrationComponent = ({onSubmit, isLoading}: Props) => {
             name="password"
           />
         </View>
-      </KeyboardAvoidingView>
 
-      <TButton
-        onPress={onSubmitHandler}
-        text="Registration"
-        isLoading={isLoading}
-      />
-    </View>
+        <TButton
+          onPress={onSubmitHandler}
+          text="Registration"
+          isLoading={isLoading}
+        />
+      </View>
+    </KeyboardAwareScrollView>
   );
 };
 
@@ -50,7 +54,7 @@ export default RegistrationComponent;
 const styles = StyleSheet.create({
   container: {flex: 1},
   kyb: {
-    flex: 0.8,
+    flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -59,5 +63,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     height: '100%',
     width: '80%',
+    flex: 1,
   },
 });

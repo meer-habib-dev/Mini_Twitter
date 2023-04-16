@@ -28,11 +28,11 @@ export const authenticationStyles = StyleSheet.create({
     color: '#454545',
     fontWeight: '900',
   },
-  tabViewContainer: {flex: 0.45, backgroundColor: 'white'},
+  tabViewContainer: {flex: 0.5, backgroundColor: 'white'},
   backgroundImage: {width: '100%', height: '100%'},
   imageWrapper: {width: '70%', height: '70%'},
   imageWrapperWrapper: {
-    flex: 0.55,
+    flex: 0.5,
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: Colors.primary,
