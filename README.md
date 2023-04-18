@@ -6,32 +6,23 @@ This project is a mobile application created using React Native. The project inc
 
 ## Demo
 
-- App Download Link - https://portal.testapp.io/apps/install/JbQgzqgW0Zdr3
+- App Download Link - https://portal.testapp.io/apps/install/ajbWpVvq1Awjx
 
 ## Screenshots
 
 Here you can include screenshots of your project.
 
-![Screenshot 1]('/_app/@lib/assets/projectsScreenshots/1.png')
-Login Screen.
+## Screenshots - of all screens
 
-![Screenshot 2]('/_app/@lib/assets/projectsScreenshots/2.png')
-Registration Screen.
-
-![Screenshot 3]('/_app/@lib/assets/projectsScreenshots/3.png')
-Timeline Screen.
-
-![Screenshot 4]('/_app/@lib/assets/projectsScreenshots/4.png')
-Search Timeline Screen.
-
-![Screenshot 5]('/_app/@lib/assets/projectsScreenshots/5.png')
-Post Tweet.
-
-![Screenshot 6]('/_app/@lib/assets/projectsScreenshots/6.png')
-My Tweet.
-
-![Screenshot 7]('/_app/@lib/assets/projectsScreenshots/7.png')
-Search User.
+<p float="left">
+  <img src="/_app/@lib/assets/projectsScreenshots/1.png" width="200" />
+  <img src="/_app/@lib/assets/projectsScreenshots/2.png" width="200" /> 
+  <img src="/_app/@lib/assets/projectsScreenshots/3.png" width="200" /> 
+  <img src="/_app/@lib/assets/projectsScreenshots/4.png" width="200" /> 
+  <img src="/_app/@lib/assets/projectsScreenshots/5.png" width="200" /> 
+  <img src="/_app/@lib/assets/projectsScreenshots/6.png" width="200" />
+  <img src="/_app/@lib/assets/projectsScreenshots/7.png" width="200" /> 
+</p>
 
 ## Prerequisites
 
@@ -48,7 +39,7 @@ To run this project locally, follow the below steps:
 
 1. Clone the project repository from GitHub.
 
-`https://github.com/meer-habib-dev/Basic-RN-App-Coding-Task-.git`
+`https://github.com/meer-habib-dev/Mini_Twitter.git`
 
 After that you should proceed as with any javascript project:
 
@@ -67,20 +58,23 @@ This template follows a very simple project structure:
 - `_app`: This folder is the main container of all the code inside your application.
   - `@lib`: This folder contains all actions that can be dispatched to redux.
     - `api` : 'Handles all the api call through out the app'
-    - `components`: Folder to store any common component that you use through your app (such as a generic button)
     - `assets`: Asset folder to store all images, vectors, etc.
     - `constants`: Folder to store any kind of constant that you have.
+    - `Hooks`: Holds all reusable hooks.
+    - `utils`: Holds all the utility functions.
     - `store`: Folder to put all redux middlewares and the store.
-  - `navigation`: Folder to store the navigators.
-    - `StackNavigator` :
-    - `TabNavigator` :
-  - `screens`: Folder that contains all your application screens/features.
-    - `Screen`: Each screen should be stored inside its folder and inside it a file for its code and a separate one for the styles and tests.
-      - `index.js`
-      - `Screen.styles.js`
-      - `utils` : contains respective screens data, hooks and functions
-  - `App.js`: Main component that starts your whole app.
-  - `index.js`: Entry point of your application as per React-Native standards.
+  - `components`: Folder to put all redux middlewares and the store.
+    - `common`: Holds all the common ui components (like button, input, alert).
+    - `navigation`: Folder to store the navigators.
+      - `StackNavigator` : Holds all stack screens.
+      - `TabNavigator` : Holds all tab screens.
+    - `screens`: Folder that contains all your application screens/features.
+      - `Screen`: Each screen should be stored inside its folder and inside it a file for its code and a separate one for the styles and tests.
+        - `index.js`
+        - `Screen.styles.js`
+        - `utils` : contains respective screens data, hooks and functions
+- `App.js`: Main component that starts your whole app.
+- `index.js`: Entry point of your application as per React-Native standards.
 
 ## Setup environments
 
