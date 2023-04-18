@@ -1,11 +1,11 @@
-import {Alert, StyleSheet, View} from 'react-native';
+import {Alert, StyleSheet, TouchableOpacity, View} from 'react-native';
 import React from 'react';
 import Ant from 'react-native-vector-icons/AntDesign';
 import Colors from '../../../../@lib/constants/theme/Colors';
 import TitleText from '../../../common/text/TitleText';
 import Text_Size from '../../../../@lib/utils/functions/textScaling';
 import {margins} from '../../../../@lib/constants';
-import {TouchableOpacity} from 'react-native-gesture-handler';
+// import {TouchableOpacity} from 'react-native-gesture-handler';
 import Icon from 'react-native-vector-icons/Entypo';
 import {deleteStorageItem} from '../../../../@lib/utils/functions/storage';
 import {useNavigation} from '@react-navigation/native';

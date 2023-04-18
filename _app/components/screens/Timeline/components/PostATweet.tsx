@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import {StyleSheet, View} from 'react-native';
+import {StyleSheet, View, ScrollView, TouchableOpacity} from 'react-native';
 import React, {useEffect} from 'react';
 import TInput from '../../../common/form/TInput';
 import * as Yup from 'yup';
@@ -8,7 +8,7 @@ import Colors from '../../../../@lib/constants/theme/Colors';
 import {margins} from '../../../../@lib/constants';
 import HeaderText from '../../../common/text/HeaderText';
 import Text_Size from '../../../../@lib/utils/functions/textScaling';
-import {ScrollView, TouchableOpacity} from 'react-native-gesture-handler';
+// import {ScrollView, TouchableOpacity} from 'react-native-gesture-handler';
 import FIcon from 'react-native-vector-icons/FontAwesome';
 import IIcon from 'react-native-vector-icons/Ionicons';
 import Loader from '../../../common/loader/Loader';

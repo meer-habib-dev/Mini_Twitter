@@ -39,7 +39,6 @@ function useAuthApi() {
 
         navigation.dispatch(
           StackActions.replace('Main', {
-            token: result?.data?.token,
             screen: 'Timeline',
           }),
         );

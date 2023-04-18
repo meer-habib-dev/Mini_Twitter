@@ -1,7 +1,7 @@
 import {Alert} from 'react-native';
 import {API_ENDPOINTS} from '../../constants/api_endpoint';
 import useApi from '../../Hooks/useApi';
-
+import Toast from 'react-native-toast-message';
 export const useFollowApi = () => {
   const api = useApi();
   const {mutateAsync, isLoading: followLoading} = api.usePost(
@@ -11,9 +11,18 @@ export const useFollowApi = () => {
     const response: any = await mutateAsync({user_id: id});
 
     if (response?.status === 200) {
-      Alert.alert('Success!', `You have followed ${username}`);
+      Toast.show({
+        position: 'bottom', 
+        type: 'success',
+        text1: 'Success!',
+        text2: `You have followed ${username}`,
+      });
     } else {
-      Alert.alert('Error!', 'Something went wrong! Try again later');
+      Toast.show({
+        type: 'error',
+        text1: 'Error!',
+        text2: 'Something went wrong! Try again later',
+      });
     }
   }
   return {handleFollow, followLoading};

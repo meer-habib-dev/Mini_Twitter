@@ -1,4 +1,4 @@
-import {Image, StyleSheet, View} from 'react-native';
+import {Image, StyleSheet, TouchableOpacity, View} from 'react-native';
 import React from 'react';
 import {Card} from 'react-native-paper';
 import TitleText from '../../../common/text/TitleText';
@@ -8,7 +8,7 @@ import Feather from 'react-native-vector-icons/Feather';
 import Colors from '../../../../@lib/constants/theme/Colors';
 import {margins} from '../../../../@lib/constants';
 import HeaderText from '../../../common/text/HeaderText';
-import {TouchableOpacity} from 'react-native-gesture-handler';
+// import {TouchableOpacity} from 'react-native-gesture-handler';
 import {getTimeSince} from '../../../../@lib/utils/functions/getTimeSince';
 import {getEmailDomain} from '../../../../@lib/utils/functions/getEmailDomain';
 interface Props {

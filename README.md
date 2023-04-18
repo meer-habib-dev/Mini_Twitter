@@ -8,6 +8,31 @@ This project is a mobile application created using React Native. The project inc
 
 - App Download Link - https://portal.testapp.io/apps/install/JbQgzqgW0Zdr3
 
+## Screenshots
+
+Here you can include screenshots of your project.
+
+![Screenshot 1]('/_app/@lib/assets/projectsScreenshots/1.png')
+Login Screen.
+
+![Screenshot 2]('/_app/@lib/assets/projectsScreenshots/2.png')
+Registration Screen.
+
+![Screenshot 3]('/_app/@lib/assets/projectsScreenshots/3.png')
+Timeline Screen.
+
+![Screenshot 4]('/_app/@lib/assets/projectsScreenshots/4.png')
+Search Timeline Screen.
+
+![Screenshot 5]('/_app/@lib/assets/projectsScreenshots/5.png')
+Post Tweet.
+
+![Screenshot 6]('/_app/@lib/assets/projectsScreenshots/6.png')
+My Tweet.
+
+![Screenshot 7]('/_app/@lib/assets/projectsScreenshots/7.png')
+Search User.
+
 ## Prerequisites
 
 - [Node.js > 12](https://nodejs.org) and npm (Recommended: Use [nvm](https://github.com/nvm-sh/nvm))

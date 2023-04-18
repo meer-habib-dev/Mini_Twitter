@@ -1,7 +1,15 @@
-import {Platform, StyleProp, StyleSheet, View, ViewStyle} from 'react-native';
+import {
+  Platform,
+  StyleProp,
+  StyleSheet,
+  View,
+  ViewStyle,
+  Switch,
+  TextInput,
+} from 'react-native';
 import React, {useState} from 'react';
 import {Controller} from 'react-hook-form';
-import {Switch, TextInput} from 'react-native-gesture-handler';
+// import {Switch, TextInput} from 'react-native-gesture-handler';
 import Colors from '../../../@lib/constants/theme/Colors';
 interface Props {
   control: any;

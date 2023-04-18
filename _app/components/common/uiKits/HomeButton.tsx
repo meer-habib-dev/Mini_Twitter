@@ -1,6 +1,6 @@
-import {Animated, StyleSheet, Text, View} from 'react-native';
+import {Animated, StyleSheet, TouchableOpacity, View} from 'react-native';
 import React, {useState} from 'react';
-import {TouchableOpacity} from 'react-native-gesture-handler';
+// import {TouchableOpacity} from 'react-native-gesture-handler';
 import TitleText from '../text/TitleText';
 import Colors from '../../../@lib/constants/theme/Colors';
 

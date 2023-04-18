@@ -19,10 +19,8 @@ function useApi() {
       async ({pageParam = 1}) => {
         try {
           if (token) {
-            console.log('yes toekn', token);
             return await api.get(url(pageParam), options);
           } else {
-            console.log('no token', token);
           }
         } catch (error) {
           return error;

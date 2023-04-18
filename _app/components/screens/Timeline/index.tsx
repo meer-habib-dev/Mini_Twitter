@@ -76,9 +76,16 @@ const Timeline = () => {
         onEndReached={handleLoadMore}
         ListFooterComponent={isFetchingNextPage ? <CardSkeleton /> : null}
         ListEmptyComponent={
-          searchCount === 0 || timelineCount === 0 ? (
+          searchCount === 0 ? (
             <View style={styles.searchCount}>
               <NoSeachResult />
+            </View>
+          ) : timelineCount === 0 ? (
+            <View style={styles.searchError}>
+              <HeaderText
+                text={'Please follow users from your profile to your timeline'}
+                textStyle={styles.textStyle}
+              />
             </View>
           ) : seachError ? (
             <View style={styles.searchError}>
